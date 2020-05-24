@@ -19,7 +19,7 @@
 \newcommand{\themename}{\textbf{\textsc{metropolis}}\xspace}
 
 \title{Sztuczne sieci neuronowe - założenia projektu}
-\date{20 czerwca 2020}
+\date{26 czerwca 2020}
 \author{Aleksandra Poręba \and Grzegorz Podsiadło }
 \institute{Wydział Fizyki i Informatyki Stosowanej \\ul. Reymonta 19 \\30-055 Kraków \\ Polska}
 %\titlegraphic{\hfill\includegraphics[height=1.5cm]{res/react_logo.png}}
@@ -85,28 +85,27 @@
 \section{Wstęp}
  
 \begin{frame}{Wstęp}
-\begin{itemize}
-\item Jako temat projektu zostało wybrane zbadanie wpływu czynników, takich jak płeć, rasa czy przygotowanie na wyniki egzaminu studentów.
-\item coś jeszcze
-\end{itemize}
+Tematem naszego projektu jest zbadanie wpływu czynników środowiskowych oraz poziomu przygotowania studenta na wynik jego egzaminu SAT.
+
+Wybrany zbiór danych pozwoli na przeprowadzenie kompleksowej analizy problemu z wykorzystaniem wielu poznanych technik związanych ze sztucznymi sieciami neuronowymi.
 \end{frame}
 
 \section{Zbiór danych}
  
 \begin{frame}{Wybrany zbiór danych}
  
-Zbiór danych, który zostanie użyty przy rozwiązywaniu problemu pochodzi z repozytorium \textit{kaggle.com} \cite{dataset}.
+Zbiór danych, który zostanie użyty przy rozwiązywaniu problemu pochodzi z repozytorium \textit{kaggle.com}  \cite{dataset}, dostępnym pod \alert{\href{https://www.kaggle.com/spscientist/students-performance-in-exams}{adresem}}.
 
-Składa się on z 8 kolumn, określająych:
+Składa się on z 8 kolumn, określających:
 \begin{itemize}
-\item płeć,
-\item rasę,
-\item poziom wykształcenia rodzica,
-\item przygotowania do egzaminu,
-\item lunch, % ???
-\item wynik egzaminu z matematyki,
-\item wynik egzaminu z czytania,
-\item wynik egzaminu z pisania.
+\item Płeć,
+\item Rasę,
+\item Wykształcenie rodzica,
+\item Przystąpienie do kursu powiązanego z testem,
+\item Rodzaj diety dostarczanej przez szkołę, 
+\item Wynik egzaminu SAT z matematyki,
+\item Wynik egzaminu SAT z czytania,
+\item Wynik egzaminu SAT z pisania.
 \end{itemize}
 
 \end{frame}
@@ -114,10 +113,13 @@ Składa się on z 8 kolumn, określająych:
 \section{Problem}
  
 \begin{frame}{Badany problem}
-% zbadanie zależności pomiędzy cechami studenta a wynikami z poszczególnych egzaminów
-% - jak bardzo przygotowanie wpływa na wynik
-%  - co najbardziej wypływa na wynik
-%  - czy istnieje zależność pomiędzy wynikami z egzaminów (w sensie jak ktoś sobie radzi dobrze w matmie to czy też dobrze w pisaniu)
+Podczas pracy nad siecią będziemy szukać odpowiedzi na kilka pytań, między innymi:
+\begin{enumerate}
+\item Jak efetywny jest kurs wstępny powiązany z testem.
+\item Jak czynniki środowiskowe takie jak płeć, rasa i wykształcenie rodziców wpływa na wyniki studentów.
+\item Czy istnieje zależność pomiędzy wynikami poszczególnych części egzaminu SAT oraz w jaką stronę ta zależność przebiega.
+\item Które czynniki mają największy wpływ na wynik testu oraz, które z czynników na które mamy wpływ daje najlepsze rezultaty na wynik.
+\end{enumerate}
 
  
 \end{frame}
@@ -125,9 +127,14 @@ Składa się on z 8 kolumn, określająych:
 \section{Rozwiązania}
  
 \begin{frame}{Planowane rozwiązania}
+Projekt zrealizowany zostanie w oparciu o środowisko Matlab.
 
-% że zostaną przetestowanie różne sieci: jednowartstowoa, mlp do klasyfikacji
-% wpływ różnych funkcji aktywacji na otrzymywane wyniki
+Planujemy zbadanie tematu pod różnymi  kątami, z wykorzystaniem różnych rodzajów sieci do klasyfikacji, między innymi:
+\begin{itemize}
+\item Jednowarstwowe sieci neuronów dyskretnych
+\item Sieć perceptronów wielowarstwowych (ang. MLP)
+\end{itemize}
+
  
 \end{frame}
 
