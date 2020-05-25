@@ -19,7 +19,7 @@
 \newcommand{\themename}{\textbf{\textsc{metropolis}}\xspace}
 
 \title{Sztuczne sieci neuronowe - założenia projektu}
-\date{26 czerwca 2020}
+\date{\today}
 \author{Aleksandra Poręba \and Grzegorz Podsiadło }
 \institute{Wydział Fizyki i Informatyki Stosowanej \\ul. Reymonta 19 \\30-055 Kraków \\ Polska}
 %\titlegraphic{\hfill\includegraphics[height=1.5cm]{res/react_logo.png}}
@@ -85,7 +85,7 @@
 \section{Wstęp}
  
 \begin{frame}{Wstęp}
-Tematem naszego projektu jest zbadanie wpływu czynników środowiskowych oraz poziomu przygotowania studenta na wynik jego egzaminu SAT.
+Tematem naszego projektu jest przewidzenie wyniku egzaminu SAT na podstawie czynników środowiskowych.
 
 Wybrany zbiór danych pozwoli na przeprowadzenie kompleksowej analizy problemu z wykorzystaniem wielu poznanych technik związanych ze sztucznymi sieciami neuronowymi.
 \end{frame}
@@ -113,14 +113,11 @@ Składa się on z 8 kolumn, określających:
 \section{Problem}
  
 \begin{frame}{Badany problem}
-Podczas pracy nad siecią będziemy szukać odpowiedzi na kilka pytań, między innymi:
-\begin{enumerate}
-\item Jak efetywny jest kurs wstępny powiązany z testem.
-\item Jak czynniki środowiskowe takie jak płeć, rasa i wykształcenie rodziców wpływa na wyniki studentów.
-\item Czy istnieje zależność pomiędzy wynikami poszczególnych części egzaminu SAT oraz w jaką stronę ta zależność przebiega.
-\item Które czynniki mają największy wpływ na wynik testu oraz, które z czynników na które mamy wpływ daje najlepsze rezultaty na wynik.
-\end{enumerate}
+Podczas pracy nad projektem będziemy szukać odpowiedzi na pytanie które czynniki mają największy wpływ na wynik testu.
 
+Badania pozwolą nam określić, które czynniki możemy odrzucić przy przewidywaniu wyników dla danych egzaminów, a które mają istotny wpływ.
+
+Zostanie również zbadane czy jesteśmy w stanie przewidzieć wynik z zadowalającą dokładnością tylko na podstawie znajomości rezultatów z dwóch pozostałych egzaminów.
  
 \end{frame}
 
@@ -134,6 +131,8 @@ Planujemy zbadanie tematu pod różnymi  kątami, z wykorzystaniem różnych rod
 \item Jednowarstwowe sieci neuronów dyskretnych
 \item Sieć perceptronów wielowarstwowych (ang. MLP)
 \end{itemize}
+
+Zostaną przetestowane różne parametry owych sieci, ilości neuronów oraz liczebności zbiorów uczących.
 
  
 \end{frame}
