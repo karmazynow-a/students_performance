@@ -1,6 +1,7 @@
 
 % TODO
 %   add multiple layers to feedforward
+%   test params multiple times
 
 function executeTest(X, D, hiddenFcn, outputFcn, hiddenSize)
     % size of testing set
@@ -52,5 +53,17 @@ function [mse_l, mse_t] = testParameters(hiddenFcn, outputFcn, hiddenSize, x, d,
     
     % calculate mse
     mse_l = perform(net, d, d_learnt);
+    plotResults(d, d_learnt, "Uczenie");
     mse_t = perform(net, d_expected, d_test);
+    plotResults(d_expected, d_test, "Test");
+end
+
+function plotResults(expected, learnt, t)
+    figure;
+    hold on;
+    plot(learnt, " *");
+    plot(expected, " *");
+    title(t);
+    legend('learnt', 'expected');
+    hold off;
 end
