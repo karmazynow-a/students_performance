@@ -3,7 +3,7 @@ clear; clc; close all;
 % 0. Preparing data
 import DataAccess.*;
 fileName = '../data/inputData.mat';
-%tmp = DataAccess.convertDataFromCSV();
+%tmp = DataAccess.convertDataFromCSV('../data/datasets_74977_169835_StudentsPerformance.csv')
 %save(fileName, 'tmp');
 dao = DataAccess(fileName);
 dao = dao.prepareInputAndOutpuForTesting();
@@ -11,7 +11,7 @@ dao = dao.prepareInputAndOutpuForTesting();
 % 1. Test for the best net
 import NeuronNetwork.*;
 net = NeuronNetwork(dao);
-net.executeTest('tansig', 'purelin', 10);
+%net.executeTest('tansig', 'purelin', 10);
 
 % 2. test performance without some features
 %   use best net parameters!
