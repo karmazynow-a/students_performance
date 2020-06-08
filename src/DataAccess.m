@@ -22,22 +22,15 @@ classdef DataAccess
         % Creates a new matrix withoud desired column
         function newDao = removeColumn(obj, columnIndex)
             newDao = obj;
-            newDao.matrix = zeros(size(obj.matrix, 1), size(obj.matrix, 2) - 1);
-            new_i = 1;
-            for i = 1:size(newDao, 2)
-                if i ~= columnIndex
-                    newDao.matrix(:, new_i) =  newDao.matrix(:, i);
-                    new_i = new_i + 1;
-                end
-            end
+            newDao.matrix(:, columnIndex) = [];
         end
         
         % Creates input and output for testing from processed data
         function obj = prepareInputAndOutpuForTesting(obj)
             % Input
-            obj.X = obj.matrix(:, 1:5)
+            obj.X = obj.matrix(:, 1:5);
             % Output
-            obj.D(:, 1) = obj.matrix(:, 6)
+            obj.D(:, 1) = obj.matrix(:, 6);
             obj.D(:, 2) = obj.matrix(:, 7);
             obj.D(:, 3) = obj.matrix(:, 8);
         end
