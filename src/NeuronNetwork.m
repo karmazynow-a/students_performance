@@ -1,7 +1,7 @@
 classdef NeuronNetwork
     properties(Constant)
         p = [ 0.3 0.5 0.7 ]; % Sizes of testing set
-        testSize = 5; % 20
+        testSize = 20;
     end
     
     properties
@@ -13,46 +13,43 @@ classdef NeuronNetwork
             obj.DAO = dao;
         end
         
-        function testMLP(obj, hiddenFcn, outputFcn, hiddenSize)
+        function testMLP(obj, hiddenFcn, outputFcn, hiddenSize, filename)
+            mse_l = zeros(NeuronNetwork.testSize, size(obj.DAO.D, 2));
+            mse_t = zeros(NeuronNetwork.testSize, size(obj.DAO.D, 2));
+            
             % for each SAT result
-            for d = obj.DAO.D
-                mse_l = zeros(NeuronNetwork.testSize, length(NeuronNetwork.p));
-                mse_t = zeros(NeuronNetwork.testSize, length(NeuronNetwork.p));
-                
+            for k = 1:size(obj.DAO.D, 2)
+                disp(['Egzamin ' num2str(k)]);
+                d = obj.DAO.D(:, k);
                 for t = 1:NeuronNetwork.testSize
-                    for k = 1:length(NeuronNetwork.p)
-                        set_size = NeuronNetwork.p(k);
-                        [x_l, d_l, x_t, d_t] =  NeuronNetwork.divideSet(set_size, obj.DAO.X, d);
-                        [mse_l(t, k), mse_t(t, k)] = NeuronNetwork.testMLPParameters(hiddenFcn, outputFcn, hiddenSize, x_l', d_l', x_t', d_t');
-                        disp(['MSE uczenia ' num2str(mse_l(t, k)) ' MSE testowania ' num2str(mse_t(t, k))]);
-                    end
+                    [mse_l(t, k), mse_t(t, k)] = NeuronNetwork.testParameters(hiddenFcn, outputFcn, hiddenSize, obj.DAO.X', d');
+                	disp(['MSE uczenia ' num2str(mse_l(t, k)) ' MSE testowania ' num2str(mse_t(t, k))]);
                 end
-                
-                % plot MSE
-                NeuronNetwork.plotNetworkPerformance(mse_l, 'Błąd uczenia MLP');
-                NeuronNetwork.plotNetworkPerformance(mse_t, 'Błąd testowania MLP');
             end
+            
+            NeuronNetwork.plotNetworkPerformance(mse_l, 'Błąd uczenia MLP', [filename '_ucz']);
+            NeuronNetwork.plotNetworkPerformance(mse_t, 'Błąd testowania MLP', [filename '_test']);
         end
         
-        function testFitnet(obj, hiddenSize)
-            for d = obj.DAO.D
-                mse_l = zeros(NeuronNetwork.testSize, length(NeuronNetwork.p));
-                mse_t = zeros(NeuronNetwork.testSize, length(NeuronNetwork.p));
+        function testExams(obj, hiddenFcn, outputFcn, hiddenSize, filename)
+            mse_l = zeros(NeuronNetwork.testSize, size(obj.DAO.D, 2));
+            mse_t = zeros(NeuronNetwork.testSize, size(obj.DAO.D, 2));
+            
+            % for each SAT result
+            for k = 1:size(obj.DAO.D, 2)
+                disp(['Egzamin ' num2str(k)]);
+                d = obj.DAO.D(:, k);
+                x = [obj.DAO.D(:, mod(k, 3)+1) obj.DAO.D(:, mod(k+1, 3)+1)];
                 
                 for t = 1:NeuronNetwork.testSize
-                    for k = 1:length(NeuronNetwork.p)
-                        set_size = NeuronNetwork.p(k);
-                        [x_l, d_l, x_t, d_t] =  NeuronNetwork.divideSet(set_size, obj.DAO.X, d);
-                        [mse_l(t, k), mse_t(t, k)] = NeuronNetwork.testFitnetParameters(hiddenSize, x_l', d_l', x_t', d_t');
-                        disp(['MSE uczenia ' num2str(mse_l(t, k)) ' MSE testowania ' num2str(mse_t(t, k))]);
-                    end
+                    [mse_l(t, k), mse_t(t, k)] = NeuronNetwork.testParameters(hiddenFcn, outputFcn, hiddenSize, x', d');
+                	disp(['MSE uczenia ' num2str(mse_l(t, k)) ' MSE testowania ' num2str(mse_t(t, k))]);
                 end
-                
-                NeuronNetwork.plotNetworkPerformance(mse_l, 'Błąd uczenia FITNET');
-                NeuronNetwork.plotNetworkPerformance(mse_t, 'Błąd testowania FITNET');
             end
+            
+            NeuronNetwork.plotNetworkPerformance(mse_l, 'Błąd uczenia MLP', [filename '_ucz']);
+            NeuronNetwork.plotNetworkPerformance(mse_t, 'Błąd testowania MLP', [filename '_test']);
         end
-        
     end
     
     methods(Static)
@@ -68,9 +65,12 @@ classdef NeuronNetwork
         end
         
         
-        function [mse_l, mse_t] = testMLPParameters(hiddenFcns, outputFcn, hiddenSizes, x, d, x_test, d_expected)
+        function [mse_l, mse_t] = testParameters(hiddenFcns, outputFcn, hiddenSizes, x, d)
             net = feedforwardnet(hiddenSizes);
-            net.divideFcn = 'dividetrain';
+            
+            net.divideParam.trainRatio = 70/100;
+            net.divideParam.valRatio = 15/100;
+            net.divideParam.testRatio = 15/100;
             
             numberOfHiddenLayers = length(hiddenSizes);
             
@@ -80,10 +80,8 @@ classdef NeuronNetwork
             end
             
             net.layers{end}.transferFcn = outputFcn;
-            
-            net = configure(net, x, d);
-            
-            % set randome weights ans bias
+          
+            % set random weights and bias
             net.IW{1} = rand(size(net.IW{1}));
             net.b{end} = zeros(size(net.b{end}));
             
@@ -92,49 +90,26 @@ classdef NeuronNetwork
                 net.b{k} = zeros(size(net.b{k}));
             end
             
+            [net, tr ]= train(net, x, d);
             %view(net);
-            net = train(net, x, d);
+          
+            % training mse
+            trainX = x(:, tr.trainInd);
+            trainD = d(:, tr.trainInd);
             
-            d_learnt = net(x);
-            d_test = net(x_test);
+            trainY = net(trainX);
+            mse_l = mse(net, trainD, trainY);
+            %figure, ploterrhist(trainD - trainY);
+            %figure, plotregression(trainD, trainY);
             
-            % round values - results should be integers
-            d_learnt = round(d_learnt);
-            d_test = round(d_test);
+            % testing mse
+            testX = x(:, tr.testInd);
+            testD = d(:, tr.testInd);
             
-            % Calculate mse
-            mse_l = perform(net, d, d_learnt);
-            %NeuronNetwork.plotResults(d, d_learnt, "Uczenie");
-            mse_t = perform(net, d_expected, d_test);
-            %NeuronNetwork.plotResults(d_expected, d_test, "Test");
-        end
-      
-        function [mse_l, mse_t] = testFitnetParameters(hiddenSize, x, d, x_test, d_expected)
-            disp(['Testing FITNET network with ' num2str(hiddenSize) ' hidden layer size']);
-            net = fitnet(hiddenSize);
-            net.divideFcn = 'dividetrain';
-            
-            net = configure(net, x, d);
-            net.IW{1} = rand(size(net.IW{1}));
-            net.LW{2, 1} = rand(size(net.LW{2, 1}));
-            net.b{1} = zeros(size(net.b{1}));
-            net.b{2} = zeros(size(net.b{2}));
-            
-            %view(net);
-            net = train(net, x, d);
-            
-            d_learnt = net(x);
-            d_test = net(x_test);
-            
-            % Round values - results should be integers
-            d_learnt = round(d_learnt);
-            d_test = round(d_test);
-            
-            % Calculate mse
-            mse_l = perform(net, d, d_learnt);
-            %NeuronNetwork.plotResults(d, d_learnt, "Uczenie");
-            mse_t = perform(net, d_expected, d_test);
-            %NeuronNetwork.plotResults(d_expected, d_test, "Test");
+            testY = net(testX);
+            mse_t = mse(net, testD, testY);
+            %figure, ploterrhist(testD - testY);
+            %figure, plotregression(testD, testY);
         end
         
         % FIXME: Move to another class?
@@ -148,22 +123,24 @@ classdef NeuronNetwork
             hold off;
         end
         
-        function plotNetworkPerformance(errs, t)
-            y = zeros(size(NeuronNetwork.p));
-            s = zeros(size(NeuronNetwork.p));
-            for k = 1:length(NeuronNetwork.p)
+        function plotNetworkPerformance(errs, t, fname)
+            y = zeros(1, 3);
+            s = zeros(1, 3);
+            for k = 1:3
                 y(k) =  mean(errs(:, k));
                 s(k) = std(errs(:, k));
             end
     
             figure;
             hold on;
-            errorbar(NeuronNetwork.p, y, s, '-o');
-            xlim([0.0 1.0]);
+            errorbar(1:3, y, s, ' o');
+            xlim([0 4]);
+            set(gca, 'XTick', 1:3, 'XTickLabel', {'Egzamin 1', 'Egzamin 2', 'Egzamin 3'});
             title(t);
-            xlabel('Parametr p');
             ylabel('Błąd średniokwadratowy');
             hold off;
+            
+            saveas(gca, ['../images/' fname '.png']);
         end
     end
 end
