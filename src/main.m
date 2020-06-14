@@ -11,7 +11,15 @@ dao = dao.prepareInputAndOutpuForTesting();
 % 1. Test for the best net
 import NeuronNetwork.*;
 net = NeuronNetwork(dao);
-%net.executeTest('tansig', 'purelin', 10);
+%net.testMLP(["logsig" "tansig"], 'purelin', [20 20]);
+%net.testMLP(["radbas" "tansig"], 'purelin', [40 20]);
+
+hiddenNetSizes = [5 10 15 20 30 40];
+for h = hiddenNetSizes
+    %net.testFitnet(h);
+end
+
+net.testFitnet(10);
 
 % 2. test performance without some features
 %   use best net parameters!
@@ -19,7 +27,6 @@ net = NeuronNetwork(dao);
 for i = 1:5
     % Remove column i from net input
     newX = dao.removeColumn(i);
-    
     
     % Test net performance without i column
     % these params are exampe ones!
