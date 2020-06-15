@@ -17,7 +17,7 @@ classdef DataAccess
             obj.matrix = load(fileName).tmp;
         end
 
-        % Creates a new matrix withoud desired column
+        % Creates a new matrix without desired column
         function newDao = removeColumn(obj, columnIndex)
             newDao = obj;
             newDao.matrix(:, columnIndex) = [];

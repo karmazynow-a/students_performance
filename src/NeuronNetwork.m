@@ -13,6 +13,19 @@ classdef NeuronNetwork
             obj.DAO = dao;
         end
         
+        function obj = testMutlipleLayersConfigurations(obj, neuronsPerLayerVector)
+            for n=neuronsPerLayerVector
+                obj.testMLP(["purelin"], 'purelin', [n],  ['purelin_purelin_'  num2str(n)]); 
+                % tansig + purelin is like fitnet
+                obj.testMLP(["purelin"], 'tansig', [n], ['purelin_tansig' num2str(n)]); 
+                obj.testMLP(["tansig"], 'purelin', [n], ['tansig_purelin' num2str(n)]);
+                obj.testMLP(["tansig"], 'tansig', [n], ['tansig_tansig' num2str(n)]);
+                obj.testMLP(["logsig" "tansig"], 'tansig', [n n], ['logsig_tansig_tansig' num2str(n)]);
+                obj.testMLP(["radbas" "tansig"], 'purelin', [n * 2 n], ['radbas_tansig_purelin' num2str(n)]);
+            end
+        end
+        
+        
         function testMLP(obj, hiddenFcn, outputFcn, hiddenSize, filename)
             mse_l = zeros(NeuronNetwork.testSize, size(obj.DAO.D, 2));
             mse_t = zeros(NeuronNetwork.testSize, size(obj.DAO.D, 2));
@@ -23,12 +36,12 @@ classdef NeuronNetwork
                 d = obj.DAO.D(:, k);
                 for t = 1:NeuronNetwork.testSize
                     [mse_l(t, k), mse_t(t, k)] = NeuronNetwork.testParameters(hiddenFcn, outputFcn, hiddenSize, obj.DAO.X', d');
-                	disp(['MSE uczenia ' num2str(mse_l(t, k)) ' MSE testowania ' num2str(mse_t(t, k))]);
+                	disp(['Learn MSE' num2str(mse_l(t, k)) 'Test MSE' num2str(mse_t(t, k))]);
                 end
             end
             
-            NeuronNetwork.plotNetworkPerformance(mse_l, 'Błąd uczenia MLP', [filename '_ucz']);
-            NeuronNetwork.plotNetworkPerformance(mse_t, 'Błąd testowania MLP', [filename '_test']);
+            NeuronNetwork.plotNetworkPerformance(mse_l, 'Learn error MLP', [filename '_learn']);
+            NeuronNetwork.plotNetworkPerformance(mse_t, 'Test error MLP', [filename '_test']);
         end
         
         function testExams(obj, hiddenFcn, outputFcn, hiddenSize, filename)
@@ -47,8 +60,8 @@ classdef NeuronNetwork
                 end
             end
             
-            NeuronNetwork.plotNetworkPerformance(mse_l, 'Błąd uczenia MLP', [filename '_ucz']);
-            NeuronNetwork.plotNetworkPerformance(mse_t, 'Błąd testowania MLP', [filename '_test']);
+            NeuronNetwork.plotNetworkPerformance(mse_l, 'Learn error MLP', [filename '_learn']);
+            NeuronNetwork.plotNetworkPerformance(mse_t, 'Test error MLP', [filename '_test']);
         end
     end
     
@@ -137,7 +150,7 @@ classdef NeuronNetwork
             xlim([0 4]);
             set(gca, 'XTick', 1:3, 'XTickLabel', {'Egzamin 1', 'Egzamin 2', 'Egzamin 3'});
             title(t);
-            ylabel('Błąd średniokwadratowy');
+            ylabel('MSE');
             hold off;
             
             saveas(gca, ['../images/' fname '.png']);

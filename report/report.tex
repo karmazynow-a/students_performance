@@ -18,6 +18,9 @@
 \usepackage{listings}
 \usepackage{xcolor}
 \usepackage{subcaption}
+\usepackage{vmargin}
+\setmarginsrb{2 cm}{2 cm}{2 cm}{2 cm}{1 cm}{1.5 cm}{1 cm}{1.5 cm}
+
 
 \definecolor{lgray}{gray}{0.96}
 \definecolor{lbcolor}{rgb}{0.9,0.9,0.9}
@@ -164,26 +167,191 @@ Otrzymane wartości są dość niskie, nie istnieje wyraźna korelacja pomiędzy
 % no np dla tych największych korelacji/najmniejszych
 
 \subsection{Testowanie sieci neuronowej}
-Dla wybranych najlepszych parametrów sieci zostało przeprowadzone uczenie z pomniejszoną ilością kolumn. Celem tego zabiegu było zbadanie, jaki wpływ mają te czynniki na poprawność działania sieci. %to jest nie po polsku xd
+Dla wybranych najlepszych parametrów sieci zostało przeprowadzone uczenie ze zmniejszoną ilością kolumn. Celem tego zabiegu było zbadanie, jaki wpływ mają te czynniki na poprawność działania sieci. %to jest nie po polsku xd
 
 \pagebreak
-\section{Przewidywanie wyniku egzaminu na podstawie pozostałych} %to też źle brzmi
+\section{Przewidywanie wyniku części egzaminu bazując na jego pozostałych częściach} %to też źle brzmi
 Jak zostało zauważone podczas badania korelacji, wyniki egzaminów są od siebie zależne (wysoki współczynnik korelacji). Korzystając z wyników z dwóch egzaminów podjęto próbę stworzenia sieci obliczającą wynik z trzeciego egzaminu.
 
-Otrzymane błędy testowania zostały przedstawione poniżej.
+Na podstawie obserwacji wielkości błędów, można zauważyć, że dla egzaminów 2 oraz 3 sieć osiąga dobre wyniki - na poziomie wartości $50$.  Przeprowadzono badanie błędu średniokwadratowego dla uczenia oraz testu różnych konfiguracji funkcji aktywacji, ilości warstw oraz ilości neuronów w poszczególnych warstwach.
 
-% rysunki z MSE oraz obok taki rysunek że jakie powinny być i jakie były przewidziane
-% te tu nie są ostateczne, tylko chciałam zobaczyć jak to będize
+Przetestowano konfigurację sieci o jednej oraz dwóch warstwach, z wykorzystaniem różnych kombinacji funkcji:
+\begin{enumerate}
+\item \verb+logsig+
+\item \verb+tansig+
+\item \verb+purelin+
+\item \verb+radbas+
+\end{enumerate}
+Dla każdej konfiguracji zbadano również wpływ ilości neuronów w poszczególnych warstwach. Ilość neuronów zmieniano między  10 a 100 ze skokiem 10. Wykresy błędów dla wybranych konfiguracji znajdują się na następnych stronach.
+
+
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.45\textwidth]{cz3_egz_ucz.png}
-\includegraphics[width=0.45\textwidth]{cz3_egz_test.png}
-\caption{Błąd uczenia i testowania sieci dla X prób dla kolejnych egzaminów}
+\begin{subfigure}[t]{0.48\textwidth} 
+\centering
+\includegraphics[height=2.2in]{purelin_purelin_20_learn.png}
+\caption{MSE uczenia dla 20 neuronów.}
+\end{subfigure}
+~~
+\begin{subfigure}[t]{0.48\textwidth} 
+\centering
+\includegraphics[height=2.2in]{purelin_purelin_20_test.png}
+\caption{MSE testu dla 20 neuronów.}
+\end{subfigure}
+
+\begin{subfigure}[t]{0.48\textwidth} 
+\centering
+\includegraphics[height=2.2in]{purelin_purelin_50_learn.png}
+\caption{MSE uczenia dla 50 neuronów.}
+\end{subfigure}
+~~
+\begin{subfigure}[t]{0.48\textwidth} 
+\centering
+\includegraphics[height=2.2in]{purelin_purelin_50_test.png}
+\caption{MSE testu dla 50 neuronów.}
+\end{subfigure}
+\caption{Błąd uczenia i testowania sieci dla X prób dla kolejnych egzaminów, \textbf{funkcje: purelin, purelin}.}
 \end{figure}
 
-Na podstawie obserwacji wielkości błędów, można zauważyć, że dla egzaminów 2 oraz 3 sieć osiąga dobre wyniki - na poziomie wartości $50$.  Dla egzaminu 1 błędy przyjmują wartości dwa razy większe. 
+Pierwszym omawianym zestawieniem jest prosty przykład dla kombinacji funkcji purelin oraz purelin. Otrzymane wartości błędów były jednymi z najmniejszych wśród wszystkich konfiguracji, z akceptowalnym odchyleniem. W przypadku tak prostej sieci ilość neuronów nie wpłynęła praktycznie wcale na otrzymane wyniki.
 
-Otrzymane wyniki można powiązać z analizowaną wcześniej korelacją danych - wyniki egzaminów 2 i 3 są ze sobą w większym stopniu powiązane, niż egzamin 1 z egzaminem 2 lub 3. 
+\begin{figure}[H]
+\centering
+\begin{subfigure}[t]{0.48\textwidth} 
+\centering
+\includegraphics[height=2.2in]{tansig_tansig20_learn.png}
+\caption{MSE uczenia dla 20 neuronów.}
+\end{subfigure}
+~~
+\begin{subfigure}[t]{0.48\textwidth} 
+\centering
+\includegraphics[height=2.2in]{tansig_tansig20_test.png}
+\caption{MSE testu dla 20 neuronów.}
+\end{subfigure}
+
+\begin{subfigure}[t]{0.48\textwidth} 
+\centering
+\includegraphics[height=2.2in]{tansig_tansig50_learn.png}
+\caption{MSE uczenia dla 50 neuronów.}
+\end{subfigure}
+~~
+\begin{subfigure}[t]{0.48\textwidth} 
+\centering
+\includegraphics[height=2.2in]{tansig_tansig50_test.png}
+\caption{MSE testu dla 50 neuronów.}
+\end{subfigure}
+
+\caption{Błąd uczenia i testowania sieci dla X prób dla kolejnych egzaminów, \textbf{funkcje: tansig, tansig}.}
+\end{figure}
+Przykładem jednej z konfiguracji, która daje mierne rezultaty jest konfiguracja z wykorzystaniem funkcji tansig oraz tansig na wyjściu. Wartości błędów były jednymi z większych, jednak istotny jest fakt, że wyniki dla trzeciego egzaminu były zbieżne, w przeciwieństwie do większości pozostałych konfiguracji. Ilość neuronów nie miała dużego wpływu na otrzymywane błędy.
+
+
+
+\begin{figure}[H]
+\centering
+\begin{subfigure}[t]{0.48\textwidth} 
+\centering
+\includegraphics[height=2.2in]{tansig_purelin20_learn.png}
+\caption{MSE uczenia dla 20 neuronów.}
+\end{subfigure}
+~~
+\begin{subfigure}[t]{0.48\textwidth} 
+\centering
+\includegraphics[height=2.2in]{tansig_purelin20_test.png}
+\caption{MSE testu dla 20 neuronów.}
+\end{subfigure}
+
+\begin{subfigure}[t]{0.48\textwidth} 
+\centering
+\includegraphics[height=2.2in]{tansig_purelin50_learn.png}
+\caption{MSE uczenia dla 50 neuronów.}
+\end{subfigure}
+~~
+\begin{subfigure}[t]{0.48\textwidth} 
+\centering
+\includegraphics[height=2.2in]{tansig_purelin50_test.png}
+\caption{MSE testu dla 50 neuronów.}
+\end{subfigure}
+
+\caption{Błąd uczenia i testowania sieci dla X prób dla kolejnych egzaminów, \textbf{funkcje: tansig, purelin}.}
+\end{figure}
+
+
+Kombinacja tansig oraz purelin daje bardzo niskie wartości błędu w porównaniu z pozostałymi metodami, jednak z dość dużym rozstrzałem między otrzymywanymi wartościami. Błedy uczenia nieznacznie spadały wraz ze wzrostem ilości neuronów w warstwie, jednak tendencja dla testu była odwrotna. Najlepsze wyniki udało się uzyskać dla 20 oraz 30 neuronów.
+
+
+
+
+\begin{figure}[H]
+\centering
+\begin{subfigure}[t]{0.48\textwidth} 
+\centering
+\includegraphics[height=2.2in]{radbas_tansig_purelin20_learn.png}
+\caption{MSE uczenia dla  40 neuronów w pierwszej warstwie, 20 w drugiej.}
+\end{subfigure}
+~~
+\begin{subfigure}[t]{0.48\textwidth} 
+\centering
+\includegraphics[height=2.2in]{radbas_tansig_purelin20_test.png}
+\caption{MSE testu dla  40 neuronów w pierwszej warstwie, 20 w drugiej.}
+\end{subfigure}
+
+\begin{subfigure}[t]{0.48\textwidth} 
+\centering
+\includegraphics[height=2.2in]{radbas_tansig_purelin50_learn.png}
+\caption{MSE uczenia dla  100 neuronów w pierwszej warstwie, 50 w drugiej.}
+\end{subfigure}
+~~
+\begin{subfigure}[t]{0.48\textwidth} 
+\centering
+\includegraphics[height=2.2in]{radbas_tansig_purelin50_test.png}
+\caption{MSE testu dla 100 neuronów w pierwszej warstwie, 50 w drugiej.}
+\end{subfigure}
+
+\caption{Błąd uczenia i testowania sieci dla X prób dla kolejnych egzaminów, \textbf{funkcje: radbas, tansig, purelin}.}
+\end{figure}
+
+Postanowiono również przetestować sieci o dwóch warstwach w bardziej egzotycznych konfiguracjach, dla przykładu konfiguracja radbas, tansig, purelin dała zadziwiająco niskie wartości błędów dla próby uczenia, który gwałtownie zmieniał się wraz z dokładaniem ilości neuronów. Pod względem błędu uczenia była to najlepsza konfiguracja.
+
+
+
+
+\begin{figure}[H]
+\centering
+\begin{subfigure}[t]{0.48\textwidth} 
+\centering
+\includegraphics[height=2.2in]{logsig_tansig_tansig20_learn.png}
+\caption{MSE uczenia dla  50 neuronów w pierwszej warstwie, 50 w drugiej.}
+\end{subfigure}
+~~
+\begin{subfigure}[t]{0.48\textwidth} 
+\centering
+\includegraphics[height=2.2in]{logsig_tansig_tansig20_test.png}
+\caption{MSE testu dla  50 neuronów w pierwszej warstwie, 50 w drugiej.}
+\end{subfigure}
+
+\begin{subfigure}[t]{0.48\textwidth} 
+\centering
+\includegraphics[height=2.2in]{logsig_tansig_tansig50_learn.png}
+\caption{MSE uczenia dla  50 neuronów w pierwszej warstwie, 50 w drugiej.}
+\end{subfigure}
+~~
+\begin{subfigure}[t]{0.48\textwidth} 
+\centering
+\includegraphics[height=2.2in]{logsig_tansig_tansig50_test.png}
+\caption{MSE testu dla 50 neuronów w pierwszej warstwie, 50 w drugiej.}
+\end{subfigure}
+
+\caption{Błąd uczenia i testowania sieci dla X prób dla kolejnych egzaminów, \textbf{funkcje: logisg, tansig, tansig}.}
+\end{figure}
+
+Kombinacja logsig, tansig oraz tansig dała ciekawe rezultaty, wartości błędu dla wszystkich prób nie licząc trzeciego egzaminu były do siebie zbliżone. Wyniki dla trzeciego egzaminu jednak zbyt odstają od reszty, by móc brać tą konfiguracje w kolejnych badaniach.
+
+W zestawieniu nie objęto wykresów dla pozostałych kombinacji (na przykład tansig, tansig),  gdyż niezależnie od ilości neuronów wyniki były bardzo złe.
+
+Otrzymane wyniki można powiązać z analizowaną wcześniej korelacją danych - wyniki egzaminów 2 i 3 są ze sobą w większym stopniu powiązane, niż egzamin 1 z egzaminem 2 lub 3.
+
+
 
 % to że błędy są mniejsze niż na podstawie czynników środowiskowcyh
 

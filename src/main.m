@@ -11,14 +11,7 @@ dao = dao.prepareInputAndOutpuForTesting();
 % 1. Test for the best net
 import NeuronNetwork.*;
 net = NeuronNetwork(dao);
-
-% tansig + purelin is just like fitnet
-%{
-net.testMLP(["tansig"], 'purelin', [20], 'cz1_1');
-net.testMLP(["tansig"], 'tansig', [20], 'cz1_2');
-net.testMLP(["logsig" "tansig"], 'tansig', [20 20], 'cz1_3');
-%}
-%net.testMLP(["radbas" "tansig"], 'purelin', [40 20]);
+net.testMutlipleLayersConfigurations([10:10:50])
 
 % 2. test performance without some features
 %   use best net parameters!
@@ -35,7 +28,7 @@ for i = 1:5
 end
 
 % 3. Predict exam results based on other exams
-net.testExams(["tansig"], 'purelin', [20], ['cz3_egz']);  
+%net.testExams(["tansig"], 'purelin', [20], ['cz3_egz']);  
 
 % *** Correlation
 % correlation coeffitient - how good linear model can show relation between two columns
