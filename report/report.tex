@@ -343,6 +343,103 @@ Otrzymane wartości są dość niskie, nie istnieje wyraźna korelacja pomiędzy
 \subsection{Testowanie sieci neuronowej z pomniejszonym zbiorem uczącym}
 Dla wybranych najlepszych parametrów sieci zostało przeprowadzone uczenie ze zmniejszoną ilością kolumn. Celem tego zabiegu było zbadanie, jaki wpływ mają te czynniki na poprawność działania sieci. %to jest nie po polsku xd
 
+\subsubsection{Uzyskane błędy w przypadku usunięcia pierwszej kolumny}
+\begin{figure}[H]
+\centering
+\begin{subfigure}[t]{0.48\textwidth} 
+\centering
+\includegraphics[height=3.3in]{purelin_purelin_20_without_1_learnBoxplot.pdf}
+\caption{MSE uczenia dla  20 neuronów w pierwszej warstwie.}
+\end{subfigure}
+~~
+\begin{subfigure}[t]{0.48\textwidth} 
+\centering
+\includegraphics[height=3.3in]{purelin_purelin_20_without_1_testBoxplot.pdf}
+\caption{MSE testu dla  20  neuronów w pierwszej warstwiej.}
+\end{subfigure}
+
+\caption{Błąd uczenia i testowania sieci w przypadku usunięcia pierwszej kolumny z danymi, \textbf{funkcje: purelin, purelin}.}
+\end{figure}
+
+\subsubsection{Uzyskane błędy w przypadku usunięcia drugiej  kolumny}
+\begin{figure}[H]
+\centering
+\begin{subfigure}[t]{0.48\textwidth} 
+\centering
+\includegraphics[height=3.3in]{purelin_purelin_20_without_2_learnBoxplot.pdf}
+\caption{MSE uczenia dla  20 neuronów w pierwszej warstwie.}
+\end{subfigure}
+~~
+\begin{subfigure}[t]{0.48\textwidth} 
+\centering
+\includegraphics[height=3.3in]{purelin_purelin_20_without_2_testBoxplot.pdf}
+\caption{MSE testu dla  20  neuronów w pierwszej warstwiej.}
+\end{subfigure}
+
+\caption{Błąd uczenia i testowania sieci w przypadku usunięcia drugiej kolumny z danymi, \textbf{funkcje: purelin, purelin}.}
+\end{figure}
+
+
+\subsubsection{Uzyskane błędy w przypadku usunięcia trzeciej kolumny}
+\begin{figure}[H]
+\centering
+\begin{subfigure}[t]{0.48\textwidth} 
+\centering
+\includegraphics[height=3.3in]{purelin_purelin_20_without_3_learnBoxplot.pdf}
+\caption{MSE uczenia dla  20 neuronów w pierwszej warstwie.}
+\end{subfigure}
+~~
+\begin{subfigure}[t]{0.48\textwidth} 
+\centering
+\includegraphics[height=3.3in]{purelin_purelin_20_without_3_testBoxplot.pdf}
+\caption{MSE testu dla  20  neuronów w pierwszej warstwiej.}
+\end{subfigure}
+
+\caption{Błąd uczenia i testowania sieci w przypadku usunięcia trzeciej  kolumny z danymi, \textbf{funkcje: purelin, purelin}.}
+\end{figure}
+
+\subsubsection{Uzyskane błędy w przypadku usunięcia czwartej kolumny}
+\begin{figure}[H]
+\centering
+\begin{subfigure}[t]{0.48\textwidth} 
+\centering
+\includegraphics[height=3.3in]{purelin_purelin_20_without_4_learnBoxplot.pdf}
+\caption{MSE uczenia dla  20 neuronów w pierwszej warstwie.}
+\end{subfigure}
+~~
+\begin{subfigure}[t]{0.48\textwidth} 
+\centering
+\includegraphics[height=3.3in]{purelin_purelin_20_without_4_testBoxplot.pdf}
+\caption{MSE testu dla  20  neuronów w pierwszej warstwiej.}
+\end{subfigure}
+
+\caption{Błąd uczenia i testowania sieci w przypadku usunięcia czwartej  kolumny z danymi, \textbf{funkcje: purelin, purelin}.}
+\end{figure}
+
+
+\subsubsection{Uzyskane błędy w przypadku usunięcia piątej kolumny}
+\begin{figure}[H]
+\centering
+\begin{subfigure}[t]{0.48\textwidth} 
+\centering
+\includegraphics[height=3.3in]{purelin_purelin_20_without_5_learnBoxplot.pdf}
+\caption{MSE uczenia dla  20 neuronów w pierwszej warstwie.}
+\end{subfigure}
+~~
+\begin{subfigure}[t]{0.48\textwidth} 
+\centering
+\includegraphics[height=3.3in]{purelin_purelin_20_without_5_testBoxplot.pdf}
+\caption{MSE testu dla  20  neuronów w pierwszej warstwiej.}
+\end{subfigure}
+
+\caption{Błąd uczenia i testowania sieci w przypadku usunięcia piątej  kolumny z danymi, \textbf{funkcje: purelin, purelin}.}
+\end{figure}
+
+
+\subsection{Wnioski}
+Badano wersję z funkcjami purelin, purelin oraz 20 neuronami w pierwszej warstwie.
+% Wnioski do dopisania
+
 \pagebreak
 \section{Przewidywanie wyniku bazując wynikach pozostałych egzaminów} %to też źle brzmi
 Jak zostało zauważone podczas badania korelacji, wyniki egzaminów są od siebie zależne (wysoki współczynnik korelacji). Korzystając z wyników z dwóch egzaminów podjęto próbę stworzenia sieci obliczającą wynik z trzeciego egzaminu.

@@ -156,26 +156,29 @@ classdef NeuronNetwork
                 s(k) = std(errors(:, k));
             end
     
-            figure;
+            fig = figure;
             hold on;
             errorbar(1:3, y, s, ' o');
             xlim([0 4]);
-            set(gca, 'XTick', 1:3, 'XTickLabel', {'Exam 1 (Math)', 'Exam 2 (Reading)', 'Exam 3 (Writing)'});
+            set(gca, 'XTick', 1:3, 'XTickLabel', {'Math', 'Reading', 'Writing'});
             title(t);
             ylabel('MSE');
             hold off;
-            
+            set(fig, 'PaperPosition', [0 0 10 10]); 
+            set(fig, 'PaperSize', [10 10]); 
             saveas(gca, ['../images/' fname '.pdf']);
         end
         
         function plotNetworkPerformanceWithBoxPlot(errors, t, fname)
-            figure;
-            boxplot(errors, 'Labels',  {'Exam 1 (Math)', 'Exam 2 (Reading)', 'Exam 3 (Writing)'})
+            fig = figure;
+            boxplot(errors, 'Labels',  {'Math', 'Reading', 'Writing'})
             hold on;
             plot(mean(errors), 'dg');
             hold off;
             title(t);
             ylabel('MSE');
+            set(fig, 'PaperPosition', [0 0 10 10]); 
+            set(fig, 'PaperSize', [10 10]); 
             saveas(gca, ['../images/' fname '.pdf']);
         end
     end
