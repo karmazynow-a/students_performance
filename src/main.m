@@ -6,26 +6,16 @@ fileName = '../data/inputData.mat';
 %tmp = DataAccess.convertDataFromCSV('../data/datasets_74977_169835_StudentsPerformance.csv')
 %save(fileName, 'tmp');
 dao = DataAccess(fileName);
-dao = dao.prepareInputAndOutpuForTesting();
 
-% 1. Test for the best net
+% 1. Test multiple configurations to find best net
 import NeuronNetwork.*;
 net = NeuronNetwork(dao);
-net.testMutlipleLayersConfigurations([10:10:50])
+%net.testMutlipleLayersConfigurations([10:20:50]);
 
-% 2. test performance without some features
-%   use best net parameters!
+% 2. Test performance without some features with best configuration found
+% in previous point
+net.testNetworkAfterColumnRemoval(["tansig"], 'purelin', [20], ['tansig_purelin_20_without_']);
 
-for i = 1:5
-    % Remove column i from net input
-    newX = dao.removeColumn(i);
-    
-    % Test net performance without i column
-    % these params are exampe ones!
-    % TODO: change after finding best ones
-    net = NeuronNetwork(newX);
-    %net.testMLP(["tansig"], 'purelin', [20], ['cz2_' num2str(i)]);  
-end
 
 % 3. Predict exam results based on other exams
 %net.testExams(["tansig"], 'purelin', [20], ['cz3_egz']);  

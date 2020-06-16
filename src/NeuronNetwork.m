@@ -15,13 +15,22 @@ classdef NeuronNetwork
         
         function obj = testMutlipleLayersConfigurations(obj, neuronsPerLayerVector)
             for n=neuronsPerLayerVector
-                obj.testMLP(["purelin"], 'purelin', [n],  ['purelin_purelin_'  num2str(n)]); 
                 % tansig + purelin is like fitnet
-                obj.testMLP(["purelin"], 'tansig', [n], ['purelin_tansig' num2str(n)]); 
-                obj.testMLP(["tansig"], 'purelin', [n], ['tansig_purelin' num2str(n)]);
-                obj.testMLP(["tansig"], 'tansig', [n], ['tansig_tansig' num2str(n)]);
-                obj.testMLP(["logsig" "tansig"], 'tansig', [n n], ['logsig_tansig_tansig' num2str(n)]);
-                obj.testMLP(["radbas" "tansig"], 'purelin', [n * 2 n], ['radbas_tansig_purelin' num2str(n)]);
+                obj.testMLP(["purelin"], 'tansig', [n], ['purelin_tansig_' num2str(n)]); 
+                obj.testMLP(["purelin"], 'purelin', [n],  ['purelin_purelin_'  num2str(n)]); 
+                obj.testMLP(["tansig"], 'purelin', [n], ['tansig_purelin_' num2str(n)]);
+                obj.testMLP(["tansig"], 'tansig', [n], ['tansig_tansig_' num2str(n)]);
+                obj.testMLP(["logsig" "tansig"], 'tansig', [n n], ['logsig_tansig_tansig_' num2str(n)]);
+                obj.testMLP(["radbas" "tansig"], 'purelin', [n * 2 n], ['radbas_tansig_purelin_' num2str(n)]);
+                obj.testMLP(["purelin" "purelin"], 'purelin', [n  n], ['purelin_purelin_purelin_' num2str(n)]);
+            end
+        end
+        
+        function obj = testNetworkAfterColumnRemoval(obj, innerLayerFn, outerLayerFn, neuronsPerLayer, fileName)
+            for column = 1:5
+                daoWithoutIColumn = obj.DAO.removeColumn(column);
+                net = NeuronNetwork(daoWithoutIColumn);
+                net.testMLP(innerLayerFn, outerLayerFn, neuronsPerLayer, [fileName num2str(column)]);  
             end
         end
         
@@ -32,7 +41,7 @@ classdef NeuronNetwork
             
             % for each SAT result
             for k = 1:size(obj.DAO.D, 2)
-                disp(['Egzamin ' num2str(k)]);
+                disp(['Exam ' num2str(k)]);
                 d = obj.DAO.D(:, k);
                 for t = 1:NeuronNetwork.testSize
                     [mse_l(t, k), mse_t(t, k)] = NeuronNetwork.testParameters(hiddenFcn, outputFcn, hiddenSize, obj.DAO.X', d');
@@ -42,6 +51,8 @@ classdef NeuronNetwork
             
             NeuronNetwork.plotNetworkPerformance(mse_l, 'Learn error MLP', [filename '_learn']);
             NeuronNetwork.plotNetworkPerformance(mse_t, 'Test error MLP', [filename '_test']);
+            NeuronNetwork.plotNetworkPerformanceWithBoxPlot(mse_l, 'Learn error MLP', [filename '_learnBoxplot']);
+            NeuronNetwork.plotNetworkPerformanceWithBoxPlot(mse_t, 'Test error MLP', [filename '_testBoxplot']);
         end
         
         function testExams(obj, hiddenFcn, outputFcn, hiddenSize, filename)
@@ -62,6 +73,7 @@ classdef NeuronNetwork
             
             NeuronNetwork.plotNetworkPerformance(mse_l, 'Learn error MLP', [filename '_learn']);
             NeuronNetwork.plotNetworkPerformance(mse_t, 'Test error MLP', [filename '_test']);
+           
         end
     end
     
@@ -136,23 +148,34 @@ classdef NeuronNetwork
             hold off;
         end
         
-        function plotNetworkPerformance(errs, t, fname)
+        function plotNetworkPerformance(errors, t, fname)
             y = zeros(1, 3);
             s = zeros(1, 3);
             for k = 1:3
-                y(k) =  mean(errs(:, k));
-                s(k) = std(errs(:, k));
+                y(k) =  mean(errors(:, k));
+                s(k) = std(errors(:, k));
             end
     
             figure;
             hold on;
             errorbar(1:3, y, s, ' o');
             xlim([0 4]);
-            set(gca, 'XTick', 1:3, 'XTickLabel', {'Egzamin 1', 'Egzamin 2', 'Egzamin 3'});
+            set(gca, 'XTick', 1:3, 'XTickLabel', {'Exam 1 (Math)', 'Exam 2 (Reading)', 'Exam 3 (Writing)'});
             title(t);
             ylabel('MSE');
             hold off;
             
+            saveas(gca, ['../images/' fname '.png']);
+        end
+        
+        function plotNetworkPerformanceWithBoxPlot(errors, t, fname)
+            figure;
+            boxplot(errors, 'Labels',  {'Exam 1 (Math)', 'Exam 2 (Reading)', 'Exam 3 (Writing)'})
+            hold on;
+            plot(mean(errors), 'dg');
+            hold off;
+            title(t);
+            ylabel('MSE');
             saveas(gca, ['../images/' fname '.png']);
         end
     end

@@ -10,27 +10,23 @@ classdef DataAccess
         % Constructor
         function obj = DataAccess(fileName)
             obj.matrix = load(fileName).tmp;
+            obj.X = obj.matrix(:, 1:end-3);  % Input
+            obj.D = obj.matrix(:, end-2:end);  % Output
         end
         
         % Loads data form M file
         function obj = loadFromMFile(obj, fileName)
             obj.matrix = load(fileName).tmp;
+            obj.X = obj.matrix(:, 1:end-3);  % Input
+            obj.D = obj.matrix(:, end-2:end);  % Output
         end
 
         % Creates a new matrix without desired column
         function newDao = removeColumn(obj, columnIndex)
             newDao = obj;
             newDao.matrix(:, columnIndex) = [];
-        end
-        
-        % Creates input and output for testing from processed data
-        function obj = prepareInputAndOutpuForTesting(obj)
-            % Input
-            obj.X = obj.matrix(:, 1:5);
-            % Output
-            obj.D(:, 1) = obj.matrix(:, 6);
-            obj.D(:, 2) = obj.matrix(:, 7);
-            obj.D(:, 3) = obj.matrix(:, 8);
+            newDao.X = newDao.matrix(:, 1:end-3);  % Input
+            newDao.D = newDao.matrix(:, end-2:end);  % Output
         end
     end
     
