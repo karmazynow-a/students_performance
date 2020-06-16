@@ -14,7 +14,7 @@ net = NeuronNetwork(dao);
 
 % 2. Test performance without some features with best configuration found
 % in previous point
-net.testNetworkAfterColumnRemoval(["tansig"], 'purelin', [20], ['tansig_purelin_20_without_']);
+net.testNetworkAfterColumnRemoval(["purelin"], 'purelin', [20], ['purelin_purelin_20_without_']);
 
 
 % 3. Predict exam results based on other exams

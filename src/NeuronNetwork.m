@@ -165,7 +165,7 @@ classdef NeuronNetwork
             ylabel('MSE');
             hold off;
             
-            saveas(gca, ['../images/' fname '.png']);
+            saveas(gca, ['../images/' fname '.pdf']);
         end
         
         function plotNetworkPerformanceWithBoxPlot(errors, t, fname)
@@ -176,7 +176,7 @@ classdef NeuronNetwork
             hold off;
             title(t);
             ylabel('MSE');
-            saveas(gca, ['../images/' fname '.png']);
+            saveas(gca, ['../images/' fname '.pdf']);
         end
     end
 end
