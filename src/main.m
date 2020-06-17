@@ -10,7 +10,7 @@ dao = DataAccess(fileName);
 % 1. Test multiple configurations to find best net
 import NeuronNetwork.*;
 net = NeuronNetwork(dao);
-net.testMutlipleLayersConfigurations([20 50]);
+%net.testMutlipleLayersConfigurations(10:10:50);
 
 % 2. Test performance without some features with best configuration found
 % in previous point
@@ -41,3 +41,10 @@ for i = 1:5
     disp(corr([dao.D dao.X(:, i)]));
 end
 %}
+
+
+% 4. Plot some histograms for data analysis
+import DataAnalyzer.*;
+da = DataAnalyzer(dao);
+da.showScoreDistribution()
+da.showScoreDependingOnGender();
