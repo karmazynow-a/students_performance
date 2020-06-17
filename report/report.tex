@@ -507,34 +507,38 @@ W zestawieniu nie objęto wykresów dla pozostałych kombinacji (na przykład ta
 
 Poniżej przedstawione zostały przykładowe wyniki dla najlepszej (purelin, purelin, 20 neuronów) i najgorszej sieci (tansig, tansig, 50 neuronów w warstwie ukrytej), dla zbioru testującego.
 
+Wyniki pochodzą z pojedynczego uruchomienia programu, przy każdym uczeniu wynik działania będzie trochę inny. 
+
+Na rysunkach możemy zauważyć, że dla najlepszej sieci otrzymane wyniki są bardziej skupione w okolicy średniej liczby punktów. W przypadku najgorszej sieci otrzymane dane są bardziej ''rozproszone'' -  nieliniowy kształt odpowiedzi niekorzystnie wypływa na wyniki sieci.
+
 \begin{figure}[H]
 \begin{subfigure}[t]{0.48\textwidth} 
 \centering
-\includegraphics[height=2.2in]{best_results_1.png}
+\includegraphics[height=2.4in]{best_results_1.png}
 \caption{Oczekiwane i znalezione wyniki dla najlepszej sieci dla egzaminu 1 (matematyka).}
 \end{subfigure}
 ~~
 \begin{subfigure}[t]{0.48\textwidth} 
 \centering
-\includegraphics[height=2.2in]{worst_exam_1.png}
+\includegraphics[height=2.4in]{worst_exam_1.png}
 \caption{Oczekiwane i znalezione wyniki dla najgorszej sieci dla egzaminu 1 (matematyka).}
 \end{subfigure}
 
 \begin{subfigure}[t]{0.48\textwidth} 
 \centering
-\includegraphics[height=2.2in]{best_results_2.png}
+\includegraphics[height=2.4in]{best_results_2.png}
 \caption{Oczekiwane i znalezione wyniki dla najlepszej sieci dla egzaminu 2 (czytanie).}
 \end{subfigure}
 ~~
 \begin{subfigure}[t]{0.48\textwidth} 
 \centering
-\includegraphics[height=2.2in]{worst_exam_2.png}
+\includegraphics[height=2.4in]{worst_exam_2.png}
 \caption{Oczekiwane i znalezione wyniki dla najgorszej sieci dla egzaminu 2 (czytanie).}
 \end{subfigure}
 
 \begin{subfigure}[t]{0.48\textwidth} 
 \centering
-\includegraphics[height=2.2in]{best_results_3.png}
+\includegraphics[height=2.4in]{best_results_3.png}
 \caption{Oczekiwane i znalezione wyniki dla najlepszej sieci dla egzaminu 3 (pisanie).}
 \end{subfigure}
 ~~
@@ -545,9 +549,7 @@ Poniżej przedstawione zostały przykładowe wyniki dla najlepszej (purelin, pur
 \end{subfigure}
 \end{figure}
 
-Powyższe wyniki pochodzą z pojedynczego uruchomienia programu, przy każdym uczeniu wynik działania będzie trochę inny. 
 
-Na rysunkach możemy zauważyć, że dla najlepszej sieci otrzymane wyniki są bardziej skupione w okolicy średniej liczby punktów. W przypadku najgorszej sieci otrzymane dane są bardziej ''rozproszone'' -  nieliniowy kształt odpowiedzi niekorzystnie wypływa na wyniki sieci.
 
 \pagebreak
 \section{Badanie wpływu ilości kolumn na jakość sieci}
