@@ -139,7 +139,7 @@ W przeciwieństwie do perceptronu jednowarstwowego sieć ta może być wykorzyst
 
 \pagebreak
 \section{Zbiór danych}
-W projekcie został wykorzystany zbiór danych \textit{Students Performance in Exams} \cite{kaggle-student} pochodzący z repozytorium \textit{Kaggle} \cite{kaggle}. Zawiera on 8 kolumn, zawierających informacje o studentach, takie jak:
+W projekcie został wykorzystany zbiór danych \textit{Students Performance in Exams} \cite{kaggle-student} pochodzący z repozytorium \textit{Kaggle} \cite{kaggle}. Zawiera on 8 kolumn, zawierających informacje o uczniach, takie jak:
 \begin{itemize}
 \item płeć,
 \item rasa,
@@ -151,9 +151,9 @@ W projekcie został wykorzystany zbiór danych \textit{Students Performance in E
 \item wynik egzaminu SAT z części matematycznej.
 \end{itemize}
 
-W zbiorze wyróżnione zostały dwie płcie, pięć różnych ras, sześć poziomów wykształcenia rodzica ( uczęszczanie do szkoły średniej bez jej ukończenia, ukończenie szkoły średniej, uczęszczanie na uczelnię wyższą bez jej ukończenia, ukończenie \textit{community college}, ukończenie studiów licencjackich, ukończenie studiów magisterskich ). Dieta określona została przez dwie wartości: standardowa i pomniejszona, a przygotowania do egzaminu jako brak lub kurs ukończony. Wyniki egzaminów są liczbami całkowitymi z zakresu od 0 do 100.
+W zbiorze wyróżnione zostały dwie płcie, pięć różnych ras, sześć poziomów wykształcenia rodzica ( uczęszczanie do szkoły średniej bez jej ukończenia, ukończenie szkoły średniej, uczęszczanie na uczelnię wyższą bez jej ukończenia, ukończenie \textit{community college}, ukończenie studiów licencjackich, ukończenie studiów magisterskich ). Dieta określona została przez dwie wartości: standardowa i pomniejszona, a kurs przygotowawczy może być ukończony lub nie. Wyniki egzaminów są liczbami całkowitymi z zakresu od 0 do 100.
 
-Zbiór danych zawiera informacje dotyczące 1000 różnych studentów, dla wszystkich dane są kompletne. Jako zbiór uczący wybrane zostały kolumny 1-5, a wynikiem działania sieci będą rezultaty kolejnych egzaminów.
+Zbiór danych zawiera informacje dotyczące 1000 różnych uczniów, dla wszystkich dane są kompletne. Jako zbiór uczący wybrane zostały kolumny 1-5, a wynikiem działania sieci będą rezultaty kolejnych egzaminów.
 
 Statystyki dotyczące zbioru zostały przedstawione w rozdziale poniżej.
 
@@ -547,7 +547,7 @@ Poniżej przedstawione zostały przykładowe wyniki dla najlepszej (purelin, pur
 
 Powyższe wyniki pochodzą z pojedynczego uruchomienia programu, przy każdym uczeniu wynik działania będzie trochę inny. 
 
-Na rysunkach możemy zauważyć, że dla najlepszej sieci wyniki pochodzące z sieci są bardziej skupione w okolicy średniej liczby punktów. W przypadku najgorszej sieci otrzymane dane są bardziej ''rozproszone'' -  nieliniowy kształt odpowiedzi niekorzystnie wypływa na wyniki sieci.
+Na rysunkach możemy zauważyć, że dla najlepszej sieci otrzymane wyniki są bardziej skupione w okolicy średniej liczby punktów. W przypadku najgorszej sieci otrzymane dane są bardziej ''rozproszone'' -  nieliniowy kształt odpowiedzi niekorzystnie wypływa na wyniki sieci.
 
 \pagebreak
 \section{Badanie wpływu ilości kolumn na jakość sieci}
@@ -555,7 +555,7 @@ Na rysunkach możemy zauważyć, że dla najlepszej sieci wyniki pochodzące z s
 Dla wybranych najlepszych parametrów sieci zostało przeprowadzone uczenie ze zmniejszoną ilością kolumn. Celem tego zabiegu było zbadanie, jaki wpływ mają te czynniki na jakość działania sieci. 
 
 \subsection{Uzyskane błędy w przypadku usunięcia pierwszej kolumny}
-Ze zbioru uczącego została usunięta kolumna informująca o \textbf{płci} studenta. Wyniki działania takiej sieci przedstawiono poniżej.
+Ze zbioru uczącego została usunięta kolumna informująca o \textbf{płci} ucznia. Wyniki działania takiej sieci przedstawiono poniżej.
 
 \begin{figure}[H]
 \centering
@@ -574,8 +574,9 @@ Ze zbioru uczącego została usunięta kolumna informująca o \textbf{płci} stu
 \caption{Błąd uczenia i testowania sieci w przypadku usunięcia pierwszej kolumny z danymi, \textbf{funkcje: purelin, purelin}.}
 \end{figure}
 
+\pagebreak
 \subsection{Uzyskane błędy w przypadku usunięcia drugiej  kolumny}
-Poniżej przedstawione zostały błędy uczenia oraz testowania sieci przy usunięciu kolumny informującej o \textbf{rasie} studenta.
+Poniżej przedstawione zostały błędy uczenia oraz testowania sieci przy usunięciu kolumny informującej o \textbf{rasie} ucznia.
 
 \begin{figure}[H]
 \centering
@@ -594,9 +595,9 @@ Poniżej przedstawione zostały błędy uczenia oraz testowania sieci przy usuni
 \caption{Błąd uczenia i testowania sieci w przypadku usunięcia drugiej kolumny z danymi, \textbf{funkcje: purelin, purelin}.}
 \end{figure}
 
-
+\pagebreak
 \subsection{Uzyskane błędy w przypadku usunięcia trzeciej kolumny}
-Ze zbioru uczącego usunięta została kolumna informująca o wykształceniu rodzica.
+Ze zbioru uczącego usunięta została kolumna informująca o \textbf{wykształceniu rodzica}.
 
 \begin{figure}[H]
 \centering
@@ -615,8 +616,9 @@ Ze zbioru uczącego usunięta została kolumna informująca o wykształceniu rod
 \caption{Błąd uczenia i testowania sieci w przypadku usunięcia trzeciej  kolumny z danymi, \textbf{funkcje: purelin, purelin}.}
 \end{figure}
 
+\pagebreak
 \subsection{Uzyskane błędy w przypadku usunięcia czwartej kolumny}
-Poniżej przedstawiono błędy sieci w przypadku usunięcia czwartej kolumny, informującej o diecie studenta.
+Poniżej przedstawiono błędy sieci w przypadku usunięcia czwartej kolumny, informującej o \textbf{diecie} ucznia.
 \begin{figure}[H]
 \centering
 \begin{subfigure}[t]{0.48\textwidth} 
@@ -634,9 +636,9 @@ Poniżej przedstawiono błędy sieci w przypadku usunięcia czwartej kolumny, in
 \caption{Błąd uczenia i testowania sieci w przypadku usunięcia czwartej  kolumny z danymi, \textbf{funkcje: purelin, purelin}.}
 \end{figure}
 
-
+\pagebreak
 \subsection{Uzyskane błędy w przypadku usunięcia piątej kolumny}
-Jako ostatnia ze zbioru uczącego została usunięta kolumna informująca o ukończeniu kursu przygotowawczego. Otrzymane wyniki przedstawiono poniżej.
+Jako ostatnia ze zbioru uczącego została usunięta kolumna informująca o \textbf{ukończeniu kursu przygotowawczego}. Otrzymane wyniki przedstawiono poniżej.
 \begin{figure}[H]
 \centering
 \begin{subfigure}[t]{0.48\textwidth} 
@@ -662,7 +664,7 @@ W przypadku usunięcia trzeciej kolumny, która informowała o wykształceniu ro
 
 \pagebreak
 \section{Przewidywanie wyniku egzaminu bazując na rezultatach pozostałych egzaminów}
-Jak zostało zauważone podczas badania korelacji, wyniki egzaminów są od siebie zależne (wysoki współczynnik korelacji). Korzystając z wyników z dwóch egzaminów podjęto próbę stworzenia sieci obliczającą wynik z trzeciego egzaminu. Sieć została skonfigurowana według najlepszych znalezionych parametrów.
+Jak zostało zauważone podczas analizowania zbioru danych, wyniki egzaminów są od siebie zależne (wysoki współczynnik korelacji). Korzystając z wyników z dwóch egzaminów podjęto próbę stworzenia sieci obliczającą wynik z trzeciego egzaminu. Sieć została skonfigurowana według najlepszych znalezionych parametrów.
 
 Otrzymane błędy testowania zostały przedstawione poniżej.
 
@@ -732,15 +734,15 @@ Największa ilość błędów we wszystkich przypadkach to te bliskie zeru. Przy
 
 \pagebreak
 \section{Podsumowanie}
+Po przetestowaniu różnych kombinacji konfiguracji sieci \textit{MLP}, z różną ilością warstw ukrytych, ilością neuronów oraz funkcjami aktywacji, udało się wyłonić najlepszą. Sieć osiągała najmniejsze wartości błędu średniokwadratowego dla liniowych funkcji aktywacji i jednej warstwy ukrytej z 20 neuronami. Błąd testowania wciąż był bliski wartości 200 - możemy uznać że jest dość duży, mimo że jest najmniejszy z osiąganych. 
 
+Gdy przyjmiemy, że nasza sieć powinna znajdować wynik w granicach błędu np 5 punktów (na 100 wszystkich możliwych) albo 10 jakość wyników sieci wzrasta. Zależnie od potencjalnego wykorzystania sieci, możliwe, że taka dokładność byłaby wystarczająca.
 
-W przypadku uczenia sieci wynikami egzaminów, jakość jej działania jest o wiele wyższa niż w przypadku uczenia jej czynnikami środowiskowymi. Powiązane jest to z faktem, że korelacja pomiędzy kolumnami z wynikami egzaminów jest o wiele większa niż pomiędzy egzaminami a czynnikami środowiskowymi. Jednak, gdy chcielibyśmy użyć sieci w prawdziwym życiu, przed egzaminami nie dysponujemy taką wiedzą. Można by było posłużyć się wynikami egzaminów próbnych - jednak jako że nie były one zawarte w naszym zbiorze, więc ta hipoteza musiałaby zostać zbadana.
+W przypadku uczenia sieci wynikami egzaminów, jakość jej działania jest o wiele wyższa niż w przypadku uczenia jej czynnikami środowiskowymi. Powiązane jest to z faktem, że korelacja pomiędzy kolumnami z wynikami egzaminów jest o wiele większa niż pomiędzy egzaminami a czynnikami środowiskowymi. Jednak, gdy chcielibyśmy użyć sieci w prawdziwym życiu, przed egzaminami nie dysponujemy taką wiedzą. Można by było posłużyć się wynikami egzaminów próbnych -  nie były one jednak zawarte w naszym zbiorze, więc ta hipoteza musiałaby zostać zbadana.
 
-Oprócz wyników egzaminu, duży wpływ ma ukończenie kursu przygotowawczego - szczególnie z matematyki. Usunięcie tej kolumny pomniejszyło jakość działania sieci. Dla pozostałych dwóch zbiorów podobnie duży wpływ ma jeszcze płeć oraz dieta studenta.
+Oprócz wyników egzaminu, duży wpływ ma ukończenie kursu przygotowawczego - szczególnie z matematyki. Usunięcie tej kolumny pomniejszyło jakość działania sieci. Dla pozostałych dwóch zbiorów podobnie duży wpływ ma jeszcze płeć oraz dieta ucznia.
 
-W żadnej konfiguracji nie udało nam się uzyskać bardzo dobrych wyników, co można uznać za pozytywną informację dla studentów. Ich wyniki nie są zdeterminowane rasą, płcią czy rezultatami pozostałych egzaminów, a ich realną pracą i wysiłkiem włożonym w przygotowanie (choć samo ukończenie kursu nie ma bardzo dużego znaczenia). Do stworzenia idealnej sieci potrzebna by była większa ilość danych, na przykład na temat samodzielnej pracy studenta, czy wyników egzaminów próbnych. 
-
-Gdy przyjmiemy, że nasza sieć powinna znajdować wynik w granicach błędu np 5 punktów (na 100 wszystkich możliwych) jakość wyników sieci wzrasta. 
+W żadnej konfiguracji nie udało nam się uzyskać idealnych wyników, co można uznać za pozytywną informację dla uczniów. Ich wyniki nie są zdeterminowane rasą, płcią czy rezultatami pozostałych egzaminów, a ich realną pracą i wysiłkiem włożonym w przygotowanie (choć sam fakt ukończenia kursu nie miał bardzo dużego znaczenia - prawdopodobnie uczeń powinien również aktywnie na nim uważać). Do stworzenia idealnej sieci potrzebna by była większa ilość danych, na przykład na temat samodzielnej pracy ucznia, wyników egzaminów próbnych, czy ocen cząstkwoych z kursu. 
 
 \pagebreak
 
