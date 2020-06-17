@@ -23,23 +23,39 @@ net = NeuronNetwork(dao);
 % *** Correlation
 % correlation coeffitient - how good linear model can show relation between two columns
 % a. between all exams results:
-%{
 disp(corr(dao.D));
 
 % plots for exams correlation
+%{
 figure;
-title("Zależność pomiędzy wynikami egzaminu 1 i 2");
-plot(dao.D(:, 1), dao.D(:, 2), ' *');
-xlabel("Egzamin 1");
-ylabel("Egzamin 2");
-saveas(gca, '../images/korelacja_egzamin12.png');
+fig = figure;
+plot(dao.D(:, 2), dao.D(:, 3), ' *');
+title("Correlation between reading and writing exam score");
+xlabel("Reading score");
+ylabel("Writing score");
+set(fig, 'PaperPosition', [0 0 12 12]); 
+set(fig, 'PaperSize', [12 12]); 
+saveas(gca, '../images/korelacja_egzamin23.pdf');
 %}
 
 % b. between exams and input data:
-%{
+
 for i = 1:5
     disp(corr([dao.D dao.X(:, i)]));
 end
+
+%{
+fig = figure;
+plot(dao.X(:, 5), dao.D(:, 3), ' *');
+xlim([0 3]);
+xticks([1 2])
+title(["Correlation between completing test preparation " "course and writing exam score"]);
+xticklabels({'Completed', 'None'})
+xlabel("Test preparation course");
+ylabel("Writing score");
+set(fig, 'PaperPosition', [0 0 12 12]); 
+set(fig, 'PaperSize', [12 12]); 
+saveas(gca, '../images/korelacja_kurs_egzamin_3.pdf');
 %}
 
 % 4. Plot some histograms for data analysis

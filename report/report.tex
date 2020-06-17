@@ -153,7 +153,7 @@ W projekcie został wykorzystany zbiór danych \textit{Students Performance in E
 
 W zbiorze wyróżnione zostały dwie płcie, pięć różnych ras, sześć poziomów wykształcenia rodzica ( uczęszczanie do szkoły średniej bez jej ukończenia, ukończenie szkoły średniej, uczęszczanie na uczelnię wyższą bez jej ukończenia, ukończenie \textit{community college}, ukończenie studiów licencjackich, ukończenie studiów magisterskich ). Dieta określona została przez dwie wartości: standardowa i pomniejszona, a kurs przygotowawczy może być ukończony lub nie. Wyniki egzaminów są liczbami całkowitymi z zakresu od 0 do 100.
 
-Zbiór danych zawiera informacje dotyczące 1000 różnych uczniów, dla wszystkich dane są kompletne. Jako zbiór uczący wybrane zostały kolumny 1-5, a wynikiem działania sieci będą rezultaty kolejnych egzaminów.
+Zbiór danych zawiera informacje dotyczące 1000 różnych uczniów, dla wszystkich dane są kompletne. Jako zbiór uczący wybrane zostały kolumny 1-5, a wynikiem działania sieci będą rezultaty kolejnych egzaminów. Został on losowo podzielony na trzy części - $15\%$ część testująca, $15\%$ części do walidacji, a pozostała część posłuży do uczenia.
 
 Statystyki dotyczące zbioru zostały przedstawione w rozdziale poniżej.
 
@@ -660,7 +660,7 @@ Jako ostatnia ze zbioru uczącego została usunięta kolumna informująca o \tex
 \subsection{Wnioski}
 Podjęto się badania sieci z funkcjami \textbf{purelin, purelin} oraz 20 neuronami w pierwszej warstwie. 
 
-W przypadku usunięcia trzeciej kolumny, która informowała o wykształceniu rodziców otrzymaliśmy największe zmniejszenie błędów średniokwadratowych. Usunięcie czwartej kolumny, która świadczyła o przejściu kursu przygotowawczego spowodowało znaczne powiększenie błędów. W pozostałych przypadkach otrzymaliśmy podobne wyniki. Może to świadczyć o dużym znaczeniu wykształcenia rodziców oraz podjęcia się kursu przygotowawczego na wynik egzaminu. tych dwóch kolumn w pracy sieci.
+W przypadku usunięcia trzeciej kolumny, która informowała o wykształceniu rodziców otrzymaliśmy największe zmniejszenie błędów średniokwadratowych. Usunięcie piątej kolumny, która świadczyła o przejściu kursu przygotowawczego spowodowało znaczne powiększenie błędów. W pozostałych przypadkach otrzymaliśmy podobne wyniki. Może to świadczyć o dużym znaczeniu wykształcenia rodziców oraz podjęcia się kursu przygotowawczego na wynik egzaminu. tych dwóch kolumn w pracy sieci.
 
 \pagebreak
 \section{Przewidywanie wyniku egzaminu bazując na rezultatach pozostałych egzaminów}
@@ -740,7 +740,7 @@ Gdy przyjmiemy, że nasza sieć powinna znajdować wynik w granicach błędu np 
 
 W przypadku uczenia sieci wynikami egzaminów, jakość jej działania jest o wiele wyższa niż w przypadku uczenia jej czynnikami środowiskowymi. Powiązane jest to z faktem, że korelacja pomiędzy kolumnami z wynikami egzaminów jest o wiele większa niż pomiędzy egzaminami a czynnikami środowiskowymi. Jednak, gdy chcielibyśmy użyć sieci w prawdziwym życiu, przed egzaminami nie dysponujemy taką wiedzą. Można by było posłużyć się wynikami egzaminów próbnych -  nie były one jednak zawarte w naszym zbiorze, więc ta hipoteza musiałaby zostać zbadana.
 
-Oprócz wyników egzaminu, duży wpływ ma ukończenie kursu przygotowawczego - szczególnie z matematyki. Usunięcie tej kolumny pomniejszyło jakość działania sieci. Dla pozostałych dwóch zbiorów podobnie duży wpływ ma jeszcze płeć oraz dieta ucznia.
+Oprócz wyników egzaminu, duży wpływ ma ukończenie kursu przygotowawczego - szczególnie z matematyki. Usunięcie tej kolumny pomniejszyło jakość działania sieci. Dla pozostałych dwóch zbiorów podobnie duży wpływ ma jeszcze płeć oraz dieta ucznia. Usunięcie informacji o wykształceniu rodzica polepszyło wyniki działania sieci - ten fakt dostarcza nam informacji, że dane które nie mają realnego wpływu na wynik mogą zakłócać działanie sieci.
 
 W żadnej konfiguracji nie udało nam się uzyskać idealnych wyników, co można uznać za pozytywną informację dla uczniów. Ich wyniki nie są zdeterminowane rasą, płcią czy rezultatami pozostałych egzaminów, a ich realną pracą i wysiłkiem włożonym w przygotowanie (choć sam fakt ukończenia kursu nie miał bardzo dużego znaczenia - prawdopodobnie uczeń powinien również aktywnie na nim uważać). Do stworzenia idealnej sieci potrzebna by była większa ilość danych, na przykład na temat samodzielnej pracy ucznia, wyników egzaminów próbnych, czy ocen cząstkwoych z kursu. 
 
