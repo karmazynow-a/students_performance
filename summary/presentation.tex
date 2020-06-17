@@ -137,7 +137,7 @@ Zostaną przetestowane różne parametry owych sieci, ilości neuronów oraz lic
  
 \end{frame}
 
-\section{Rozwiazania}
+\section{Rozwiązania}
 
 \begin{frame}{Analiza zbioru danych}
 Przed przystapieniem do tworzenia sieci postanowiono na dokonanie analizy zbioru dostarczonych danych. W tym celu utworzono szereg róznych histogramów pozwalających na sprawdzenie zależności miedzy kolumnami danych a wynikami egzaminu. 
@@ -152,12 +152,21 @@ Przed przystapieniem do tworzenia sieci postanowiono na dokonanie analizy zbioru
 
 
 \begin{frame}{Analiza zbioru danych}
-Utrzymane rozkłady wyników egzaminów były zbliżone do rozkłądu normalnego. Przeprowadzone badanie pokazało, że mężczyźni uzyskują lepsze rezultaty w części matematycznej, kobiety natomiast w pozostałych dwóch częśćiach. Dodatkowo widoczny jest silny pozytywny wpływ  przystąpienia do kursu wstępnego, oraz mały wpływ przyjmowanego posiłku. Widoczny był również wpływ wykształcenia rodziców, nie dało się jednak wysnuć wniosków dotyczacych rasy, gdyż dane zostały nazwane tylko kolejnymi lterami alfabetu.
+Utrzymane rozkłady wyników egzaminów były zbliżone do rozkładu normalnego. Przeprowadzone badanie pokazało, że mężczyźni uzyskują lepsze rezultaty w części matematycznej, kobiety natomiast w pozostałych dwóch częściach.
+
+Dodatkowo widoczny jest silny pozytywny wpływ  przystąpienia do kursu wstępnego, oraz mały wpływ przyjmowanego posiłku. Widoczny był również wpływ wykształcenia rodziców.
+\end{frame}
+
+\begin{frame}{Analiza zbioru danych - korelacja}
+W dalszej części została zbadana korelacja pomiędzy danymi. Największa zależność została zaobserwowana pomiędzy wynikami egzaminów - można spodziewać się, że sieć będzie osiągać lepsze rezultaty przy uczeniu nimi.
+
+Dla czynników środowiskowych zależności były niewielkie - poniżej wartości $0.5$. Na podstawie współczynnika korelacji można spodziewać się, że znaczenie będzie mieć fakt uczęszczania na  kurs przygotowawczy, płeć, czy dieta.
 \end{frame}
 
 \begin{frame}[fragile]{Poszukiwanie najlepszej konfiguracji sieci neuronowej}
-Przeprowadzono badanie błędu średniokwadratowego dla uczenia oraz testu różnych konfiguracji funkcji aktywacji, ilości warstw ukrytych oraz ilości neuronów w poszczególnych warstwach.
-Przetestowano konfigurację sieci o jednej oraz dwóch warstwach, z wykorzystaniem różnych kombinacji funkcji \verb+logsig+, \verb+tansig+, \verb+purelin+, \verb+radbas+. Dla wszystkich konfiguracji utworzono wykresy pudełkowe błędów, wnioski z przeprowadzonych badań zawarto w sprawozdaniu.
+Przeprowadzono badanie błędu średniokwadratowego dla uczenia oraz testu różnych konfiguracji. Przetestowano konfigurację sieci o jednej oraz dwóch warstwach, z wykorzystaniem różnych kombinacji funkcji \verb+logsig+, \verb+tansig+, \verb+purelin+, \verb+radbas+. Dla wszystkich konfiguracji utworzono wykresy pudełkowe błędów, wnioski z przeprowadzonych badań zawarto w sprawozdaniu.
+
+Najlepsza znaleziona konfiguracja została przedstawiona poniżej.
 
 \begin{figure}[H]
 \centering
@@ -168,13 +177,41 @@ Przetestowano konfigurację sieci o jednej oraz dwóch warstwach, z wykorzystani
 \end{frame}
 
 \begin{frame}[fragile]{Badanie wpływu ilości kolumn na jakość sieci}
-Dla wybranej poprzednio konfiguracji najlepszych parametrów sieci zostało przeprowadzone uczenie ze zmniejszoną ilością kolumn. Kolejno testowano uczenie oraz działanie sieci bez kolejnych kolumn, w celu zbadania jaki wpływ mają one na działanie sieci.
+Dla najlepszej konfiguracji sieci testowano uczenie oraz działanie sieci bez kolejnych kolumn, w celu zbadania jaki wpływ mają one na działanie sieci.
 
+W przypadku usunięcia  kolumny, która informowała o wykształceniu rodziców otrzymaliśmy największe zmniejszenie błędów średniokwadratowych. Usunięcie  kolumny, która świadczyła o przejściu kursu przygotowawczego spowodowało znaczne powiększenie błędów. W pozostałych przypadkach otrzymaliśmy podobne wyniki. 
 
-
-W przypadku usunięcia  kolumny, która informowała o wykształceniu rodziców otrzymaliśmy największe zmniejszenie błędów średniokwadratowych. Usunięcie  kolumny, która świadczyła o przejściu kursu przygotowawczego spowodowało znaczne powiększenie błędów. W pozostałych przypadkach otrzymaliśmy podobne wyniki. Może to świadczyć o dużym znaczeniu wykształcenia rodziców oraz podjęcia się kursu przygotowawczego na wynik egzaminu tych dwóch kolumn w pracy sieci.
+Może to świadczyć o dużym znaczeniu faktu podjęcia się kursu przygotowawczego (polepsza działanie sieci) oraz wykształceniu rodziców (pogarsza działanie sieci) na wyniki egzaminów.
 
 \end{frame}
+
+\begin{frame}[fragile]{Uczenie sieci wynikami egzaminów}
+W ostatniej części projektu zostało przeprowadzone uczenie sieci, wykorzystując jako zbiór wejściowy wyniki z pozostałych egzaminów.
+
+Sieć osiągała wtedy najlepsze rezultaty - błąd zmalał nawet czterokrotnie!
+
+Związane jest to z faktem wysokiej korelacji pomiędzy wynikami egzaminów.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.3\textwidth]{../report/static/cz3_egz_test.pdf}
+\caption{ MSE testowania dla najlepszej konfiguracji sieci.}
+\end{figure}
+
+\end{frame}
+
+\section{Podsumowanie}
+
+\begin{frame}[fragile]{Podsumowanie}
+Z powodzeniem udało nam się znaleźć sieć neuronową o najmniejszej wartości błędu średniokwadratowego - jest to konfiguracja z liniowymi funkcjami aktywacji oraz 20 neuronami w warstwie ukrytej.
+
+Choć wartości błędu średniokwadratowego są duże, gdy przeanalizujemy wyniki działania sieci, zauważymy, że dla poszczególnych wyników błąd jest najczęściej bliski zeru. Gdy dopuścimy margines błędu np 5 lub 10 punktów jakość wyników sieci znacząco wzrośnie.
+
+Poszczególne kolumny mają wpływ na działanie sieci - pozytywny (kurs przygotowawczy)  bądź negatywny (wykształcenie rodziców).
+
+Sieć osiąga najlepsze rezultaty, gdy do uczenia użyjemy wyników pozostałych egzaminów, jednak nie są one zawsze dostępne.
+\end{frame}
+
 
 %----------------------------------------------------------------------------
 %  BIBLIOGRAFIA
