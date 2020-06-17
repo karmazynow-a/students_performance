@@ -46,5 +46,7 @@ end
 % 4. Plot some histograms for data analysis
 import DataAnalyzer.*;
 da = DataAnalyzer(dao);
-da.showScoreDistribution()
+da.showScoreDistribution();
 da.showScoreDependingOnGender();
+da.showHistogramsDependingOnAttributes();
+

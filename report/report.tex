@@ -158,6 +158,94 @@ Zbiór danych zawiera informacje dotyczące 1000 różnych studentów, dla wszys
 Statystyki dotyczące zbioru zostały przedstawione w rozdziale poniżej.
 
 \subsection{Analiza zbioru danych}
+Poniższy rozdział opisuje częściową analizę dostarczonych danych. Na wykresach \ref{fig:histograms} pokazano histogramy z ogólnymi wynikami poszczególnych testów. We wszystkich przypadkach rozkład przypomina rozkład normalny, z wyłączeniem części pisemnej. Na wykresach pudełkowych na rysunkach \ref{fig:box_genders} pokazano jak wyglądały cechy w zależności od płci. Gołym okiem widoczne są lepsze wyniki mężczyzn w części z matematyki oraz dominacja w pozostałych częściach przez kobiety. Kolejne wykresy prezentują jak rozkładały się wyniki egzaminu w zależności od poszczególnych cech jak płeć, wykształcenie rodziców czy przyjmowany posiłek. Wykresy opierały się na części egzaminu z matematyki.
+
+
+\begin{figure}[H]
+\centering
+\begin{subfigure}[t]{0.48\textwidth} 
+\centering
+\includegraphics[height=3.3in]{math_score_distribution.pdf}
+\caption{Wyniki dla matematyki.}
+\end{subfigure}
+~~
+\begin{subfigure}[t]{0.48\textwidth} 
+\centering
+\includegraphics[height=3.3in]{reading_score_distribution.pdf}
+\caption{Wyniki dla czytania.}
+\end{subfigure}
+
+\begin{subfigure}[t]{0.48\textwidth} 
+\centering
+\includegraphics[height=3.3in]{writing_score_distribution.pdf}
+\caption{Wyniki dla pisania.}
+\end{subfigure}
+
+\caption{Rozkłady wyników poszczególnych egzaminów.} \label{fig:histograms}
+\end{figure}
+
+
+\begin{figure}[H]
+\centering
+\begin{subfigure}[t]{0.48\textwidth} 
+\centering
+\includegraphics[height=3.3in]{math_score_per_gender.pdf}
+\caption{Wyniki dla matematyki.}
+\end{subfigure}
+~~
+\begin{subfigure}[t]{0.48\textwidth} 
+\centering
+\includegraphics[height=3.3in]{reading_score_per_gender.pdf}
+\caption{Wyniki dla czytania.}
+\end{subfigure}
+
+\begin{subfigure}[t]{0.48\textwidth} 
+\centering
+\includegraphics[height=3.3in]{writing_score_per_gender.pdf}
+\caption{Wyniki dla pisania.}
+\end{subfigure}
+
+\caption{Wykresy pudełkowe dla poszczególnych cześći egzaminów w zależności od płci.} \label{fig:box_genders}
+\end{figure}
+
+
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.5\textwidth]{hist_math_score_per_gender.pdf}
+\caption{Uzyskane wyniki na teście z matematyki w zależności od płci.}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.5\textwidth]{hist_math_score_per_race.pdf}
+\caption{Uzyskane wyniki na teście z matematyki w zależności od rasy.}
+\end{figure}
+
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.5\textwidth]{hist_math_score_per_lunch.pdf}
+\caption{Uzyskane wyniki na teście z matematyki w zależności od przyjmowanego posiłku.}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.5\textwidth]{hist_math_score_per_parent_education.pdf}
+\caption{Uzyskane wyniki na teście z matematyki w zależności od wykształcenia rodziców.}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.5\textwidth]{hist_math_score_per_test_prep.pdf}
+\caption{Uzyskane wyniki na teście z matematyki w zależności od przystąpienia do testu przygotowawczego.}
+\end{figure}
+
+
+Analizując powyższe histogramy widoczny jest wyższy wynik testu dla męskiej części populacji oraz dla osób, które nie przystąpiły do kursu przygotowawczego. Widoczny jest również pozytywny wpływ standardowej wersji posiłku. Niestety nie jesteśmy w stanie podjąć się analizy różnicy między poszczególnymi rasami, gdyż zbiór danych nie opisuję czym różnią się poszczególne grupy.
+
+
+
 
 \subsection{Korelacja pomiędzy danymi}
 W ramach projektu został obliczony współczynnik korelacji \textit{Pearsona} pomiędzy danymi z repozytorium. Dzięki niemu możemy sprawdzić w jakim stopniu zależne są od siebie dane, a dzięki temu dostosować czynniki użyte do uczenia sieci.
