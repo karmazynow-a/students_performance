@@ -42,7 +42,6 @@ for i = 1:5
 end
 %}
 
-
 % 4. Plot some histograms for data analysis
 import DataAnalyzer.*;
 da = DataAnalyzer(dao);

@@ -193,9 +193,9 @@ classdef DataAnalyzer
             set(fig, 'PaperSize', [10 10]); 
             saveas(gca, ['../images/hist_math_score_per_lunch.pdf']);
             
-            testPrep = obj.DAO.matrix(:, 4);
-            none  = mathScore(testPrep == 2);
+            testPrep = obj.DAO.matrix(:, 5);
             completed  = mathScore(testPrep == 1);
+            none  = mathScore(testPrep == 2);
            
             map = brewermap(2,'Set2');   
             fig = figure;
