@@ -103,7 +103,7 @@ Tematem projektu było stworzenie sieci neuronowej, za której pomocą mielibyś
 \begin{itemize}
 \item Jaka jest najlepsza konfiguracja sieci neuronowej dla tego zbioru danych?
 \item Czy usunięcie niektórych kolumn wpłynie znacząco na jakość działania sieci?
-\item Czy da się przewidzieć wynik egzaminu na podstawie znajomości rezultatów pozostałych dwóch z zadowalającą jakością?
+\item Czy da się przewidzieć wynik egzaminu na podstawie znajomości rezultatów pozostałych z zadowalającą jakością?
 \end{itemize}
 
 Przed przystąpieniem do implementacji sieci  zbiór danych został dokładnie przeanalizowany pod kątem statystyk oraz korelacji parametrów, dzięki czemu łatwiej było określić poprawność uzyskiwanych wyników.
@@ -111,11 +111,9 @@ Przed przystąpieniem do implementacji sieci  zbiór danych został dokładnie p
 Projekt został zrealizowany w oparciu o środowisko Matlab.
 
 \subsection{Sieć perceptron wielowarstwowy}
-Perceptron wielowarstwowy ( \textit{MLP}, ang. \textit{Multilayer Perceptron}) ogólnie to jest zajebisty
+Perceptron wielowarstwowy ( \textit{MLP}, ang. \textit{Multilayer Perceptron}) jest rodzajem sztucznej sieci neuronowej. W odróżnieniu od sieci jednowartswowej, takiej jak perceptron, składa się on minimalnie z dwóch warstw: wejściowej i wyjściowej, oraz może zawierać jedną lub więcej warstw ukrytych. Każda warstwa może mieć inną liczbę neuronów, czy funkcję aktywacji.
 
-W odróżnieniu od sieci jednowartswowej, sieć wielowarstwowa składa się minimalnie z dwóch warstw: wejściowej i wyjściowej, oraz może zawierać jedną lub więcej warstw ukrytych. Każda warstwa może mieć inną liczbę neuronów, czy funkcję przenoszenia.
-
-Schemat sieci został przedstawiony na ryzunku poniżej.
+Schemat sieci został przedstawiony na rysunku poniżej.
 
 \begin{figure}[H]
 \centering
@@ -123,10 +121,12 @@ Schemat sieci został przedstawiony na ryzunku poniżej.
 \caption{Schemat sieci \textit{MLP} \cite{mlp-schema}. Ilość neuronów w warstwie wejściowej zazwyczaj odpowiada ilości parametrów wejściowych, a w warstwie wyjściowej ilości możliwych klas.}
 \end{figure}
 
-Perceptron wielowarstwowy możemy zapisać go jako funkcję \cite{wiki}:
+
+Wynik działania perceptronu wielowarstwowego możemy zapisać jako złożenie funkcji\cite{wiki}:
 \begin{equation}
-y = f(x, \theta)
+y = f^{(n)}(... f^{(3)}(f^{(2)}(f^{(1)}(x, \theta_1), \theta_2), \theta_3), \theta_n)
 \end{equation}
+
 gdzie:
 \begin{description}
 \item $y$ - wyjście sieci,
@@ -134,16 +134,12 @@ gdzie:
 \item $\theta$ - wagi.
 \end{description}
 
-Dla sieci złożonej z wielu warstw wynik działania możemy otrzymać poprzez złożenie \cite{wiki}:
-\begin{equation}
-f(x) = f^{(n)}(... f^{(3)}(f^{(2)}(f^{(1)}(x))))
-\end{equation}
-
 W przeciwieństwie do perceptronu jednowarstwowego sieć ta może być wykorzystywana dla zbiorów, które nie są liniowo separowalne.
+
 
 \pagebreak
 \section{Zbiór danych}
-W projekcie został wykorzystany zbiór danych \textit{Students Performance in Exams} \cite{kaggle-student} pochodzący z repozytorium \textit{Kaggle} \cite{kaggle}. Składa się on z 8 kolumn, zawierających informacje o studentach, takie jak:
+W projekcie został wykorzystany zbiór danych \textit{Students Performance in Exams} \cite{kaggle-student} pochodzący z repozytorium \textit{Kaggle} \cite{kaggle}. Zawiera on 8 kolumn, zawierających informacje o studentach, takie jak:
 \begin{itemize}
 \item płeć,
 \item rasa,
@@ -155,21 +151,21 @@ W projekcie został wykorzystany zbiór danych \textit{Students Performance in E
 \item wynik egzaminu SAT z części matematycznej.
 \end{itemize}
 
-W zbiorze wyróżnione zostały dwie płcie, pięć różnych ras, sześć poziomów wykształcenia rodzica ( uczęszczanie do szkoły średniej, bez jej ukończenia, ukończenie szkoły średniej, uczęszczanie na uczelnie wyższą bez jej ukończenia, ukończenie \textit{community college}, ukończenie studiów licencjackich, ukończenie studiów magisterskich ). Dieta określona została przez dwie wartości: standardowa i pomniejszona, a przygotowania jako brak lub kurs ukończony. Wyniki egzaminów są liczbami całkowitymi z zakresu od 0 do 100.
+W zbiorze wyróżnione zostały dwie płcie, pięć różnych ras, sześć poziomów wykształcenia rodzica ( uczęszczanie do szkoły średniej bez jej ukończenia, ukończenie szkoły średniej, uczęszczanie na uczelnię wyższą bez jej ukończenia, ukończenie \textit{community college}, ukończenie studiów licencjackich, ukończenie studiów magisterskich ). Dieta określona została przez dwie wartości: standardowa i pomniejszona, a przygotowania do egzaminu jako brak lub kurs ukończony. Wyniki egzaminów są liczbami całkowitymi z zakresu od 0 do 100.
 
-Zbiór danych zawiera informacje dotyczące 1000 różnych studentów, dla wszystkich dane są kompletne. Jako zbiór uczący wybrane zostały kolumny 1-5, a wynikiem działania sieci był rezultaty kolejnych egzaminów.
+Zbiór danych zawiera informacje dotyczące 1000 różnych studentów, dla wszystkich dane są kompletne. Jako zbiór uczący wybrane zostały kolumny 1-5, a wynikiem działania sieci będą rezultaty kolejnych egzaminów.
 
 Statystyki dotyczące zbioru zostały przedstawione w rozdziale poniżej.
 
 \subsection{Analiza zbioru danych}
 
 \subsection{Korelacja pomiędzy danymi}
-W ramach projektu został obliczony współczynnik korelacji \textit{Pearsona} pomiędzy danymi z repozytorium. Dzięki niemu możemy sprawdzić jak bardzo zależne są od siebie dane, a dzięki temu dostosować czynniki użyte do uczenia sieci.
+W ramach projektu został obliczony współczynnik korelacji \textit{Pearsona} pomiędzy danymi z repozytorium. Dzięki niemu możemy sprawdzić w jakim stopniu zależne są od siebie dane, a dzięki temu dostosować czynniki użyte do uczenia sieci.
 
 Do obliczenia współczynnika korelacji została użyta funkcja pakietu MATLAB \verb\corr\.
 
 \subsubsection {Korelacja pomiędzy wynikami egzaminów}
-Na początku został wyznaczony współczynnik korelacji pomiędzy wynikami egzaminów. Jako ''Egzamin 1'' został przyjęty egzamin z części matematycznej, ''Egzamin 2'' części z czytania, a ''Egzamin 3'' egzamin z części pisemnej. Otrzymane wyniki przedstawiono w tabeli poniżej.
+Na początku został wyznaczony współczynnik korelacji pomiędzy wynikami egzaminów. Jako ''Egzamin 1'' został przyjęty egzamin z części matematycznej, ''Egzamin 2'' - część z czytania, a ''Egzamin 3'' egzamin z części pisemnej. Otrzymane wyniki przedstawiono w tabeli poniżej.
 
 \begin{table}[H]
 \centering
@@ -182,15 +178,15 @@ Egzamin 1 i 2 & Egzamin 1 i 3 & Egzamin 2 i 3  \\
 \end{tabular}
 \end{table}
 
-Dla wszystkich kombinacji otrzymaliśmy wartości większe od $0.5$, możemy więc uznać, że dane są od siebie zależne. Największa korelacja występuje pomiędzy egzaminem 2 oraz 3, czyli egzaminem z czytania oraz z pisania - współczynnik jest równy $0.86$.
+Dla wszystkich kombinacji otrzymaliśmy wysokie wartości (większe od $0.6$), możemy więc uznać, że dane te są od siebie liniowo zależne. Największa korelacja występuje pomiędzy egzaminem 2 oraz 3, czyli egzaminem z czytania oraz z pisania - współczynnik jest równy $0.86$.
 
 Na rysunkach poniżej zależności pomiędzy zbiorami zostały przedstawione w sposób graficzny.
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.45\textwidth]{korelacja_egzamin12.png}
-\includegraphics[width=0.45\textwidth]{korelacja_egzamin13.png}
-\includegraphics[width=0.45\textwidth]{korelacja_egzamin23.png}
+\includegraphics[width=0.45\textwidth]{korelacja_egzamin12.pdf}
+\includegraphics[width=0.45\textwidth]{korelacja_egzamin13.pdf}
+\includegraphics[width=0.45\textwidth]{korelacja_egzamin23.pdf}
 \caption{Zależności pomiędzy wynikami egzaminów przedstawione w sposób graficzny.}
 \end{figure}
 
@@ -218,11 +214,19 @@ Dieta &  -0.1564  & -0.1838   & -0.2647  \\
 
 Otrzymane wartości są dość niskie, nie istnieje wyraźna korelacja pomiędzy którąś z tych cech, a wynikami. Najmniejszą zależność obserwujemy pomiędzy wynikami, wykształceniem rodziców - są one najbliższe zeru. Największe znaczenie ma przystąpienie do kursu przygotowawczego, w dalszej kolejności dieta oraz płeć.
 
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.45\textwidth]{korelacja_kurs_egzamin_1.pdf}
+\includegraphics[width=0.45\textwidth]{korelacja_kurs_egzamin_2.pdf}
+\includegraphics[width=0.45\textwidth]{korelacja_kurs_egzamin_3.pdf}
+\caption{Zależności pomiędzy wynikami egzaminów a ukończeniem kursu przygotowawczego przedstawiona w sposób graficzny. Na rysunkach można zauważyć, że osoby które ukończyły kurs, uzyskiwały wynik większy niż 15, ale osoby, które nie ukończyły kursu uzyskiwały równie wysokie wyniki, co osoby po kursie. Wyjątek stanowi egzamin z części matematycznej - tu osób, które uzyskały wysoki wynik bez ukończenia kursu jest mniej. }
+\end{figure}
+
 \pagebreak
 \section{Poszukiwanie najlepszej konfiguracji sieci neuronowej}
 % że regresja, co testowaliśmy i dlaczego takie
 % mlp 
-Przeprowadzono badanie błędu średniokwadratowego dla uczenia oraz testu różnych konfiguracji funkcji aktywacji, ilości warstw oraz ilości neuronów w poszczególnych warstwach.
+Przeprowadzono badanie błędu średniokwadratowego dla uczenia oraz testu różnych konfiguracji funkcji aktywacji, ilości warstw ukrytych oraz ilości neuronów w poszczególnych warstwach.
 Przetestowano konfigurację sieci o jednej oraz dwóch warstwach, z wykorzystaniem różnych kombinacji funkcji:
 \begin{enumerate}
 \item \verb+logsig+
@@ -455,7 +459,7 @@ Poniżej przedstawione zostały przykładowe wyniki dla najlepszej (purelin, pur
 
 Powyższe wyniki pochodzą z pojedynczego uruchomienia programu, przy każdym uczeniu wynik działania będzie trochę inny. 
 
-Na rysunkach możemy zauważyć, że dla najlepszej sieci wyniki nauczone są bardziej skupione w okolicy średniej. W przypadku najgorszej sieci otrzymane dane są bardziej ''rozproszone'' -  gdy sieć uzna że osoba powinna dostać na przykład 20 punków, a dostała 90, różnica jest większa, niż 90, a okolice 50 punktów, których trzyma się najlepsza sieć. Nieliniowy kształt odpowiedzi niekorzystnie wypływa na wyniki sieci.
+Na rysunkach możemy zauważyć, że dla najlepszej sieci wyniki pochodzące z sieci są bardziej skupione w okolicy średniej liczby punktów. W przypadku najgorszej sieci otrzymane dane są bardziej ''rozproszone'' -  nieliniowy kształt odpowiedzi niekorzystnie wypływa na wyniki sieci.
 
 \pagebreak
 \section{Badanie wpływu ilości kolumn na jakość sieci}
@@ -635,7 +639,7 @@ Na rysunkach poniżej został przedstawiony za pomocą histogramu rozkład błę
 \end{subfigure}
 \end{figure}
 
-Największa ilość błędów we wszystkich przypadkach to te, bliskie zeru. Przy testowaniu zbioru uczącego wartości są bardziej skoncentrowane, szczególnie dla egzaminów 2 oraz 3. Chociaż różnica pomiędzy wartością oczekiwaną a doświadczalną jest czasem duża, sieć w większości przypadków potrafi przewidzieć wynik egzaminu z dokładnością do 10 punktów. 
+Największa ilość błędów we wszystkich przypadkach to te bliskie zeru. Przy testowaniu zbioru uczącego wartości są bardziej skoncentrowane, szczególnie dla egzaminów 2 oraz 3. Chociaż różnica pomiędzy wartością oczekiwaną a doświadczalną jest czasem duża, sieć w większości przypadków potrafi przewidzieć wynik egzaminu z dokładnością do 10 punktów. 
 
 \pagebreak
 \section{Podsumowanie}
