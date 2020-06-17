@@ -22,7 +22,7 @@ classdef NeuronNetwork
                 obj.testMLP(["tansig"], 'tansig', [n], ['tansig_tansig_' num2str(n)]);
                 obj.testMLP(["logsig" "tansig"], 'tansig', [n n], ['logsig_tansig_tansig_' num2str(n)]);
                 obj.testMLP(["radbas" "tansig"], 'purelin', [n * 2 n], ['radbas_tansig_purelin_' num2str(n)]);
-                obj.testMLP(["purelin" "purelin"], 'purelin', [n  n], ['purelin_purelin_purelin_' num2str(n)]);
+                %obj.testMLP(["purelin" "purelin"], 'purelin', [n  n], ['purelin_purelin_purelin_' num2str(n)]);
             end
         end
         

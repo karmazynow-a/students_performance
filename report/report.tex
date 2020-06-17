@@ -232,30 +232,44 @@ Przetestowano konfigurację sieci o jednej oraz dwóch warstwach, z wykorzystani
 \end{enumerate}
 Dla każdej konfiguracji zbadano również wpływ ilości neuronów w poszczególnych warstwach. Ilość neuronów zmieniano między  10 a 100 ze skokiem 10. Wykresy błędów dla wybranych konfiguracji znajdują się na następnych stronach.
 
+\subsection{Wykresy pudełkowe}
+Otrzymane błędy uczenia oraz testu dla różnych konfiguracji przedstawiono przy pomocy tak zwanych wykresów pudełkowych z wąsami. Przykład takiego wykresu pokazano na rysunku \ref{fig:exampleBoxplot}.
+
+
+Na wykresie zielone diamenty symbolizują wartości średnie z N prób, czerwona linia wewnątrz oznacza medianę. Górna granica pudełka to trzeci kwartyl ($Q_3$), natomiast dolna to kwaryl pierwszy ($Q_1$). Dolny i górny ''wąs'' reprezentują kolejno wartości $Q_1 - 1.5 IQR$ oraz  $Q_3 +  1.5 IQR$, gdzie $IQR$ to rozstęp ćwiartkowy, obliczany jako $IQR = Q_3 - Q_1$. Czerwonymi plusami zaznaczono wartości odstające.
+
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.45\textwidth]{tansig_purelin_20_learnBoxplot.pdf}
+\caption{Przykład wykresu pudełkowego pokazującego błędy dla różnych egzaminów.} \label{fig:exampleBoxplot}
+\end{figure}
+
+\subsection{Otrzymane błędy uczenia i testu dla różnych konfiguracji}
 
 \begin{figure}[H]
 \centering
 \begin{subfigure}[t]{0.48\textwidth} 
 \centering
-\includegraphics[height=2.2in]{purelin_purelin_20_learn.png}
+\includegraphics[height=2.2in]{purelin_purelin_20_learnBoxplot.pdf}
 \caption{MSE uczenia dla 20 neuronów.}
 \end{subfigure}
 ~~
 \begin{subfigure}[t]{0.48\textwidth} 
 \centering
-\includegraphics[height=2.2in]{purelin_purelin_20_test.png}
+\includegraphics[height=2.2in]{purelin_purelin_20_testBoxplot.pdf}
 \caption{MSE testu dla 20 neuronów.}
 \end{subfigure}
 
 \begin{subfigure}[t]{0.48\textwidth} 
 \centering
-\includegraphics[height=2.2in]{purelin_purelin_50_learn.png}
+\includegraphics[height=2.2in]{purelin_purelin_50_learnBoxplot.pdf}
 \caption{MSE uczenia dla 50 neuronów.}
 \end{subfigure}
 ~~
 \begin{subfigure}[t]{0.48\textwidth} 
 \centering
-\includegraphics[height=2.2in]{purelin_purelin_50_test.png}
+\includegraphics[height=2.2in]{purelin_purelin_50_testBoxplot.pdf}
 \caption{MSE testu dla 50 neuronów.}
 \end{subfigure}
 \caption{Błąd uczenia i testowania sieci dla X prób dla kolejnych egzaminów, \textbf{funkcje: purelin, purelin}.}
@@ -267,25 +281,25 @@ Pierwszym omawianym zestawieniem jest prosty przykład dla kombinacji funkcji pu
 \centering
 \begin{subfigure}[t]{0.48\textwidth} 
 \centering
-\includegraphics[height=2.2in]{tansig_tansig20_learn.png}
+\includegraphics[height=2.2in]{tansig_tansig_20_learnBoxplot.pdf}
 \caption{MSE uczenia dla 20 neuronów.}
 \end{subfigure}
 ~~
 \begin{subfigure}[t]{0.48\textwidth} 
 \centering
-\includegraphics[height=2.2in]{tansig_tansig20_test.png}
+\includegraphics[height=2.2in]{tansig_tansig_20_testBoxplot.pdf}
 \caption{MSE testu dla 20 neuronów.}
 \end{subfigure}
 
 \begin{subfigure}[t]{0.48\textwidth} 
 \centering
-\includegraphics[height=2.2in]{tansig_tansig50_learn.png}
+\includegraphics[height=2.2in]{tansig_tansig_50_learnBoxplot.pdf}
 \caption{MSE uczenia dla 50 neuronów.}
 \end{subfigure}
 ~~
 \begin{subfigure}[t]{0.48\textwidth} 
 \centering
-\includegraphics[height=2.2in]{tansig_tansig50_test.png}
+\includegraphics[height=2.2in]{tansig_tansig_50_testBoxplot.pdf}
 \caption{MSE testu dla 50 neuronów.}
 \end{subfigure}
 
@@ -299,25 +313,25 @@ Przykładem jednej z konfiguracji, która daje mierne rezultaty jest konfiguracj
 \centering
 \begin{subfigure}[t]{0.48\textwidth} 
 \centering
-\includegraphics[height=2.2in]{tansig_purelin20_learn.png}
+\includegraphics[height=2.2in]{tansig_purelin_20_learnBoxplot.pdf}
 \caption{MSE uczenia dla 20 neuronów.}
 \end{subfigure}
 ~~
 \begin{subfigure}[t]{0.48\textwidth} 
 \centering
-\includegraphics[height=2.2in]{tansig_purelin20_test.png}
+\includegraphics[height=2.2in]{tansig_purelin_20_testBoxplot.pdf}
 \caption{MSE testu dla 20 neuronów.}
 \end{subfigure}
 
 \begin{subfigure}[t]{0.48\textwidth} 
 \centering
-\includegraphics[height=2.2in]{tansig_purelin50_learn.png}
+\includegraphics[height=2.2in]{tansig_purelin_50_learnBoxplot.pdf}
 \caption{MSE uczenia dla 50 neuronów.}
 \end{subfigure}
 ~~
 \begin{subfigure}[t]{0.48\textwidth} 
 \centering
-\includegraphics[height=2.2in]{tansig_purelin50_test.png}
+\includegraphics[height=2.2in]{tansig_purelin_50_testBoxplot.pdf}
 \caption{MSE testu dla 50 neuronów.}
 \end{subfigure}
 
@@ -334,25 +348,25 @@ Kombinacja tansig oraz purelin daje bardzo niskie wartości błędu w porównani
 \centering
 \begin{subfigure}[t]{0.48\textwidth} 
 \centering
-\includegraphics[height=2.2in]{radbas_tansig_purelin20_learn.png}
+\includegraphics[height=2.2in]{radbas_tansig_purelin_20_learnBoxplot.pdf}
 \caption{MSE uczenia dla  40 neuronów w pierwszej warstwie, 20 w drugiej.}
 \end{subfigure}
 ~~
 \begin{subfigure}[t]{0.48\textwidth} 
 \centering
-\includegraphics[height=2.2in]{radbas_tansig_purelin20_test.png}
+\includegraphics[height=2.2in]{radbas_tansig_purelin_20_testBoxplot.pdf}
 \caption{MSE testu dla  40 neuronów w pierwszej warstwie, 20 w drugiej.}
 \end{subfigure}
 
 \begin{subfigure}[t]{0.48\textwidth} 
 \centering
-\includegraphics[height=2.2in]{radbas_tansig_purelin50_learn.png}
+\includegraphics[height=2.2in]{radbas_tansig_purelin_50_learnBoxplot.pdf}
 \caption{MSE uczenia dla  100 neuronów w pierwszej warstwie, 50 w drugiej.}
 \end{subfigure}
 ~~
 \begin{subfigure}[t]{0.48\textwidth} 
 \centering
-\includegraphics[height=2.2in]{radbas_tansig_purelin50_test.png}
+\includegraphics[height=2.2in]{radbas_tansig_purelin_50_testBoxplot.pdf}
 \caption{MSE testu dla 100 neuronów w pierwszej warstwie, 50 w drugiej.}
 \end{subfigure}
 
@@ -368,25 +382,25 @@ Postanowiono również przetestować sieci o dwóch warstwach w bardziej egzotyc
 \centering
 \begin{subfigure}[t]{0.48\textwidth} 
 \centering
-\includegraphics[height=2.2in]{logsig_tansig_tansig20_learn.png}
+\includegraphics[height=2.2in]{logsig_tansig_tansig_20_learnBoxplot.pdf}
 \caption{MSE uczenia dla  50 neuronów w pierwszej warstwie, 50 w drugiej.}
 \end{subfigure}
 ~~
 \begin{subfigure}[t]{0.48\textwidth} 
 \centering
-\includegraphics[height=2.2in]{logsig_tansig_tansig20_test.png}
+\includegraphics[height=2.2in]{logsig_tansig_tansig_20_testBoxplot.pdf}
 \caption{MSE testu dla  50 neuronów w pierwszej warstwie, 50 w drugiej.}
 \end{subfigure}
 
 \begin{subfigure}[t]{0.48\textwidth} 
 \centering
-\includegraphics[height=2.2in]{logsig_tansig_tansig50_learn.png}
+\includegraphics[height=2.2in]{logsig_tansig_tansig_50_learnBoxplot.pdf}
 \caption{MSE uczenia dla  50 neuronów w pierwszej warstwie, 50 w drugiej.}
 \end{subfigure}
 ~~
 \begin{subfigure}[t]{0.48\textwidth} 
 \centering
-\includegraphics[height=2.2in]{logsig_tansig_tansig50_test.png}
+\includegraphics[height=2.2in]{logsig_tansig_tansig_50_testBoxplot.pdf}
 \caption{MSE testu dla 50 neuronów w pierwszej warstwie, 50 w drugiej.}
 \end{subfigure}
 

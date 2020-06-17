@@ -10,11 +10,11 @@ dao = DataAccess(fileName);
 % 1. Test multiple configurations to find best net
 import NeuronNetwork.*;
 net = NeuronNetwork(dao);
-%net.testMutlipleLayersConfigurations([10:20:50]);
+net.testMutlipleLayersConfigurations([20 50]);
 
 % 2. Test performance without some features with best configuration found
 % in previous point
-net.testNetworkAfterColumnRemoval(["purelin"], 'purelin', [20], ['purelin_purelin_20_without_']);
+%net.testNetworkAfterColumnRemoval(["purelin"], 'purelin', [20], ['purelin_purelin_20_without_']);
 
 
 % 3. Predict exam results based on other exams
